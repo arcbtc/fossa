@@ -38,4 +38,4 @@ From "Manage Libraries" install,<br>
 
 *Details on wiring can be found at the header of each ino file*
 
-[![ESP32 GPIO Map](https://i.imgur.com/PLP3YBG.jpg)]
+![ESP32 GPIO Map](https://i.imgur.com/PLP3YBG.jpg)
