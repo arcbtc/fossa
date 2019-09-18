@@ -1,6 +1,5 @@
 
 ![ESP32 GPIO Map](https://i.imgur.com/djuJF6L.png)
-# The Fossa
 A Lightning Network ATM, for loose fiat change.
 
 The Fossa is an extension of the Physically Faucet project, by adding support for a coin mechanism.
