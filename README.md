@@ -12,7 +12,7 @@ The Fossa is an extension of the Physically Faucet project, by adding support fo
 ![ESP32 GPIO Map](https://i.imgur.com/kxu5Xmo.png)
 # Workflow
 - User puts in chnage (we use Euros, but the mech can be programmed for any fiat, up to 6 different coins)
-- Coin mech sends pulses to the ESP32, 1 pulse for every 10cents (could be better, occasionally drops pulses)
+- Coin mech sends pulses to the ESP32, 1 pulse for every 10cents
 - ESP32 calcualtes how much as been entered (capped for demo purposes at 1.50)
 - ESP32 connects to lightning.gifts, and generates an invoice for the amount
 - ESP32 connects to an LND instance and pays the invoice on lightning.gifts (This project uses a local copy of Zap as an admin macaroon is required so funds should be limited!
