@@ -3,7 +3,7 @@
  *  Due to using an admin macaroon, an LND instance with limited funds is preferable, Zap desktop wallet is ideal
  *  Wiring - ESP32 NodeMCU 32s + ST7735 TFT 1.8
  *
- *  3.5inch TFT PIN MAP: [VCC - 3.3V, GND - GND, CS - GPIO5, Reset - GPIO16, AO (DC) - GPI17, SDA (MOSI) - GPIO23, SCK - GPIO18, LED - GPIO4]
+ *  3.5inch TFT PIN MAP: [VCC - 5V, GND - GND, CS - GPIO5, Reset - GPIO16, AO (DC) - GPI17, SDA (MOSI) - GPIO23, SCK - GPIO18, LED - 3.3v]
  */
 
 #include "xbm.h"             // Sketch tab header for xbm images
