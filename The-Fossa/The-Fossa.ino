@@ -1,5 +1,5 @@
 /**
- *  Physically Faucet uses Zap desktop wallet tunnelled through serveo.net "ssh -R SOME-NAME.serveo.net:3010:localhost:8180 serveo.net"
+ *  The FOSSA uses Zap desktop wallet tunnelled through serveo.net "ssh -R SOME-NAME.serveo.net:3010:localhost:8180 serveo.net"
  *  Due to using an admin macaroon, an LND instance with limited funds is preferable, Zap desktop wallet is ideal
  *  Wiring - ESP32 NodeMCU 32s + ST7735 TFT 1.8
  *
@@ -44,7 +44,7 @@ String on_currency = "BTCEUR";
 int httpsPort = 443;
 const char* gifthost = "api.lightning.gifts";
 
-const char* lndhost = "arcbtc.serveo.net"; //if using serveo.net replace the *SOME-RANDOM-WORD* bit
+const char* lndhost = "SOME-RANDOM-WORD.serveo.net"; //if using serveo.net replace the *SOME-RANDOM-WORD* bit
 String adminmacaroon = "YOUR-ADMIN-MACAROON"; //obv, this is dodge, so use an instance of LND with limited funds, I use desktop Zap wallet and make it available through serveo.net (https://docs.zaphq.io/docs-desktop-neutrino-connect is a useful doc) 
 const int lndport = 3010;
 
@@ -52,7 +52,7 @@ String accepts = "10 20 50 1 2";
 
 //Wifi details
 char wifiSSID[] = "YOUR-WIFI";
-char wifiPASS[] = "YOUR-WIFI-PASS";
+char wifiPASS[] = "WIFI-PASS";
 
 // Constants
 const int coinpin = 4;
@@ -76,12 +76,13 @@ void setup()
   //connect to local wifi            
   WiFi.begin(wifiSSID, wifiPASS);   
   while (WiFi.status() != WL_CONNECTED) {
-   wificheck();
+    wificheck();
     delay(2000);
   }
 
   attachInterrupt(digitalPinToInterrupt(coinpin), coinInterrupt, RISING);
-
+  pinMode(21, OUTPUT); 
+  digitalWrite(21, LOW); 
   on_rates();
 
 }
@@ -92,6 +93,8 @@ void loop() {
   splash();
 
   if (millis() - prevmils > 3000 && counta == 1){
+    detachInterrupt(digitalPinToInterrupt(coinpin));
+    digitalWrite(21, HIGH); 
      tft.fillScreen(TFT_BLACK);
    Serial.println(totes);
    
@@ -148,10 +151,12 @@ void loop() {
       Serial.println(spent);
     }
   }
-   
+   digitalWrite(21, LOW); 
    counta = 0;
    spent = false;
    totes = 0;
+   delay(1000);
+   attachInterrupt(digitalPinToInterrupt(coinpin), coinInterrupt, RISING);
   }
 }
 
@@ -232,14 +237,14 @@ void nodecheck(){
     checker = true;
   }
   }
-  
 }
+
 
 void wificheck(){
     tft.fillScreen(TFT_BLACK);
     tft.setTextColor(TFT_RED);
     tft.setCursor(60, 60, 2);
-    tft.println("no wifi detected");   
+    tft.println("Connecting to wifi");   
 }
 
 void makepayment(){
