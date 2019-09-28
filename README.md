@@ -30,7 +30,7 @@ Install the ESP32 hardware,<br>
 https://github.com/espressif/arduino-esp32#installation-instructions
 
 From "Manage Libraries" install,<br>
-- Ucglib
+- TFT_eSPI
 - ArduinoJson
 - qrcode (By Richard Moore)
 
