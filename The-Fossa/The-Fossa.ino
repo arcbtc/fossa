@@ -76,7 +76,7 @@ void setup()
   //connect to local wifi            
   WiFi.begin(wifiSSID, wifiPASS);   
   while (WiFi.status() != WL_CONNECTED) {
-
+   wificheck();
     delay(2000);
   }
 
@@ -233,6 +233,13 @@ void nodecheck(){
   }
   }
   
+}
+
+void wificheck(){
+    tft.fillScreen(TFT_BLACK);
+    tft.setTextColor(TFT_RED);
+    tft.setCursor(60, 60, 2);
+    tft.println("no wifi detected");   
 }
 
 void makepayment(){
