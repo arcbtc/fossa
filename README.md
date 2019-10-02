@@ -38,6 +38,9 @@ From "Manage Libraries" install,<br>
 
 # ESP32 NodeMCU-32S GPIO map
 
+![ESP32 GPIO Map](https://i.imgur.com/LwJA5ms.png)
+
+
 *Details on wiring can be found at the header of each ino file*
 
 ![ESP32 GPIO Map](https://i.imgur.com/PLP3YBG.jpg)
