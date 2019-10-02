@@ -20,6 +20,7 @@ The Fossa is an extension of the Physically Faucet project, by adding support fo
 
 *note currently LNURL is only supported by "Bitcion Lightning Wallet" and "Bluewallet"
 
+![The FOSSA](https://i.imgur.com/ehiinaS.png)
 
 # Installing arduino + libraries
 
@@ -34,7 +35,7 @@ From "Manage Libraries" install,<br>
 - ArduinoJson
 - qrcode (By Richard Moore)
 
-![a](https://i.imgur.com/mCfnhZN.png)
+![BITCOIN](https://i.imgur.com/mCfnhZN.png)
 
 # ESP32 NodeMCU-32S GPIO map
 
