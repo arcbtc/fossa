@@ -1,5 +1,5 @@
 /** 
- *  This version of the FOSSA uses the incredible telegram lightning wallet lntxbot (DMD lntxbot on telegram), details on preparing the key in the README
+ *  This version of the FOSSA uses the incredible telegram lightning wallet lntxbot (DMD lntxbot on telegram), get keys using /api
  *  Wiring - ESP32 NodeMCU 32s + ST7735 TFT 1.8
  *
  *  3.5inch TFT PIN MAP: [VCC - 5V, GND - GND, CS - GPIO5, Reset - GPIO16, AO (DC) - GPI17, SDA (MOSI) - GPIO23, SCK - GPIO18, LED - 3.3v]
