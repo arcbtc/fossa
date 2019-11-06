@@ -9,7 +9,7 @@ The Fossa is an extension of the Physically Faucet project, by adding support fo
 # Parts (Project cost £50)
 - ST7735 1.8 TFT, ESP32 NodeMCU 32s, 5v Relay, Multi Coin Acceptor Mechanism, Storage Box, 12v Lead Acid Battery (optional, 12v power supply could be used), DC 12V to 5V/ 3A Voltage Converter with Dual USB 
 
-![ESP32 GPIO Map](https://i.imgur.com/kxu5Xmo.png)
+![ESP32 GPIO Map](https://i.imgur.com/DVF2Hwq.png)
 
 # Workflow (LNTXBOT version)
 - User puts in chnage (we use Euros, but the mech can be programmed for any fiat, up to 6 different coins)
