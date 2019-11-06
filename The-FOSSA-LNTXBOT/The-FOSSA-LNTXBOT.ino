@@ -47,8 +47,7 @@ String lnurl;
 float conversion;
 String on_currency = "BTCGBP"; //change last 3 letters to set currency 
 int httpsPort = 443;
-//LNTXBOT details, from lntxbot use /bluewallet to get lndhub://user:password@someurl.com, base64 "user:password" to get your spend key
-//Use the URL after "@" for your lntxbothost  
+//The details can be fetched from lntxbot using /api
 const char* lntxbothost = "LNTXBOT-HOSTURL";
 String spendkey = "YOUR-SPEND-KEY"; 
 
