@@ -51,3 +51,7 @@ From "Manage Libraries" install,<br>
 *Details on wiring can be found at the header of each ino file*
 
 ![ESP32 GPIO Map](https://i.imgur.com/PLP3YBG.jpg)
+
+# Tip me
+If you like this project and might even use or extend it, why not send some tip love!
+https://paywall.link/to/f4e4e
