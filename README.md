@@ -38,6 +38,7 @@ https://github.com/espressif/arduino-esp32#installation-instructions
 
 From "Manage Libraries" install,<br>
 - TFT_eSPI
+- NTPClient
 - ArduinoJson
 - qrcode (By Richard Moore)
 
