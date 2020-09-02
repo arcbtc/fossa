@@ -3,8 +3,6 @@
 
 ## The Free and Open Source Software (FOSS) ATM
 
-The Fossa is an extension of the Physically Faucet project, by adding support for a coin mechanism.
-
 #### Includes easy config access point!
 
 # Parts (Project cost £50)
