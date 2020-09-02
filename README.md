@@ -1,6 +1,7 @@
 
 ![ESP32 GPIO Map](https://i.imgur.com/djuJF6L.png)
-The Free and Open Source Software (FOSS) ATM, dump that stinky loose fiat change for glorious sats!
+
+## The Free and Open Source Software (FOSS) ATM, dump that stinky loose fiat change for glorious sats!
 
 The Fossa is an extension of the Physically Faucet project, by adding support for a coin mechanism.
 
