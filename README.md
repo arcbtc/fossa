@@ -5,7 +5,7 @@
 
 <p align="center">
   <img src="https://i.imgur.com/68MP0xP.jpg">
-  <img src="https://i.imgur.com/G7GP74T.jpg">
+  <img src="https://i.imgur.com/JFVVKwo.jpg">
 </p>
 
 ## Includes easy config access point!
