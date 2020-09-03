@@ -11,6 +11,7 @@
 # Parts (Project cost £80)
 * ILI9341 1.8 TFT
 * ESP32 NodeMCU 32s
+* USB extension
 * Breadboard
 * DG600F(S) Multi Coin Acceptor
 * Storage Box 
