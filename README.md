@@ -40,4 +40,4 @@ From "Manage Libraries" install,<br>
 
 # Wiring
 
-![ESP32 GPIO Map](https://i.imgur.com/jWA6839.png)
+![ESP32 GPIO Map](https://i.imgur.com/sRI8A6M.png)
