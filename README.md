@@ -3,7 +3,7 @@
 
 ## The Free and Open Source Software (FOSS) ATM
 
-![ESP32 GPIO Map](https://i.imgur.com/68MP0xP.jpg)
+<img src="https://i.imgur.com/68MP0xP.jpg" align="center">
 
 #### Includes easy config access point!
 
