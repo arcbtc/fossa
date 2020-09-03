@@ -8,7 +8,11 @@
   <img src="https://i.imgur.com/JFVVKwo.jpg">
 </p>
 
-# Parts (Project cost £80)
+## Tutorial
+
+https://www.youtube.com/watch?v=1FeE74sDNGA
+
+## Parts (Project cost £80)
 * ILI9341 1.8 TFT
 * ESP32 NodeMCU 32s
 * USB extension
@@ -23,7 +27,7 @@
   <img src="https://i.imgur.com/h4DpLNc.jpg">
 </p>
 
-# Installing arduino + libraries
+## Installing arduino + libraries
 
 Install the Arduino IDE,<br>
 https://www.arduino.cc/en/Main/Software
@@ -38,6 +42,6 @@ From "Manage Libraries" install,<br>
 
 ![BITCOIN](https://i.imgur.com/mCfnhZN.png)
 
-# Wiring
+## Wiring
 
 ![ESP32 GPIO Map](https://i.imgur.com/sRI8A6M.png)
