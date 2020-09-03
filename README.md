@@ -3,7 +3,7 @@
 
 ## The Free and Open Source Software (FOSS) ATM
 
-<img src="https://i.imgur.com/68MP0xP.jpg" align="center">
+<center><img src="https://i.imgur.com/68MP0xP.jpg"></center>
 
 #### Includes easy config access point!
 
