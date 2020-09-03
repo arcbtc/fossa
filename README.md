@@ -20,7 +20,7 @@
 * Male/Female GPIO jumpers
 
 <p align="center">
-  <img src="https://i.imgur.com/EWBkSVZ.jpg">
+  <img src="https://i.imgur.com/h4DpLNc.jpg">
 </p>
 
 # Installing arduino + libraries
