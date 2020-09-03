@@ -19,6 +19,10 @@
 * 5v to 12v step up cable
 * Male/Female GPIO jumpers
 
+<p align="center">
+  <img src="https://i.imgur.com/EWBkSVZ.jpg">
+</p>
+
 # Installing arduino + libraries
 
 Install the Arduino IDE,<br>
