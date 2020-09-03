@@ -3,6 +3,8 @@
 
 ## The Free and Open Source Software (FOSS) ATM
 
+![ESP32 GPIO Map](https://i.imgur.com/68MP0xP.jpg)
+
 #### Includes easy config access point!
 
 # Parts (Project cost £80)
