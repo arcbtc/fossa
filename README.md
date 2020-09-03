@@ -7,7 +7,7 @@
   <img src="https://i.imgur.com/68MP0xP.jpg">
 </p>
 
-#### Includes easy config access point!
+## Includes easy config access point!
 
 # Parts (Project cost £80)
 * ILI9341 1.8 TFT
