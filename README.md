@@ -1,14 +1,12 @@
 
 ![ESP32 GPIO Map](https://i.imgur.com/djuJF6L.png)
 
-## The Free and Open Source Software (FOSS) ATM
+## The Free and Open Source Software (FOSS) ATM (includes easy config access point!)
 
 <p align="center">
   <img src="https://i.imgur.com/68MP0xP.jpg">
   <img src="https://i.imgur.com/JFVVKwo.jpg">
 </p>
-
-## Includes easy config access point!
 
 # Parts (Project cost £80)
 * ILI9341 1.8 TFT
