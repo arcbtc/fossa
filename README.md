@@ -3,6 +3,8 @@
 
 ## The Free and Open Source Software (FOSS) ATM (includes easy config access point!)
 
+> <i>Join our <a href="https://t.me/makerbits">telegram support/chat</a>.</i>
+
 <p align="center">
   <img src="https://i.imgur.com/68MP0xP.jpg">
   <img src="https://i.imgur.com/JFVVKwo.jpg">
