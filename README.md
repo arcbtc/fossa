@@ -1,6 +1,9 @@
 ![FOSSA](https://user-images.githubusercontent.com/33088785/169420554-1b5a132a-3235-44ac-9ede-35d7c592e6e7.png)
 
-## INCLUDES ACCESS POINT FOR EASY CONFIG
+* Completly FOSS
+* Cheap to make
+* Includes bill acceptor and coin acceptor
+* Include access point for easy setup
 
 > <i>Join our <a href="https://t.me/makerbits">telegram support/chat</a>.</i>
 
