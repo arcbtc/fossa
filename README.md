@@ -1,7 +1,6 @@
+![FOSSA](https://user-images.githubusercontent.com/33088785/169420554-1b5a132a-3235-44ac-9ede-35d7c592e6e7.png)
 
-![ESP32 GPIO Map](https://i.imgur.com/djuJF6L.png)
-
-## The Free and Open Source Software (FOSS) ATM (includes easy config access point!)
+## INCLUDES ACCESS POINT FOR EASY CONFIG
 
 > <i>Join our <a href="https://t.me/makerbits">telegram support/chat</a>.</i>
 
