@@ -29,7 +29,6 @@ HardwareSerial billAcceptor(2);
 /////////////////////////////////
          
 bool format = false; // true for formatting SPIFFS, use once, then make false and reflash
-int portalPin = 27; // Pin that triggers portal
 
 /////////////////////////////////
 /////////////////////////////////
@@ -50,8 +49,8 @@ int randomPin;
 int maxamount;
 int credit = 0;
 
-int billAcceptorValues[6] = {500, 1000, 2000};
-int coinAcceptorValues[6] = {10, 20, 50, 100};
+int billAcceptorValues[6] = {};
+int coinAcceptorValues[6] = {};
 
 const byte BUTTON_PIN_A = 39;
 Button BTNA(BUTTON_PIN_A);
@@ -134,6 +133,7 @@ static const char PAGE_ELEMENTS[] PROGMEM = R"(
  }
 )";
 
+
 static const char PAGE_SAVE[] PROGMEM = R"(
 {
   "uri": "/save",
@@ -194,8 +194,7 @@ void setup() {
   while (timer < 2000)
   {
     digitalWrite(2, LOW);
-    Serial.println(touchRead(portalPin));
-    if(touchRead(portalPin) < 60){
+    if(BTNA.read()){
       Serial.println("Launch portal");
       triggerAp = true;
       timer = 5000;
@@ -368,58 +367,68 @@ void loop(){
       paydisplay = true;
       digitalWrite(11, LOW);
     }
+    
     while(paydisplay){
-      float amount = tally / 100;
+      dataIn = String(tally);
+      makeLNURL();
       qrShowCodeLNURL("PRESS BUTTON TO EXIT");
-      while(true){}
+      bool buttonbool = false;
+      while(buttonbool == false){
+        buttonbool = BTNA.read();
+      }
+      paydisplay = false;
+      active = false;
     }
+
     byte byteIn = 0;
     int byteInInt = 0;
     int byteIntCoin = 0;
     byteIn = billAcceptor.read();
     byteInInt = billAcceptor.read();
     byteIntCoin = coinAcceptor.read();
-    message(BTNA.read(), true);
     printbyte(byteInInt);
     current_time = millis();
     if ( byteInInt >= 1 && byteInInt <= 3){
       bill = 0;
       stored_time = millis();
       delay(1000);
-      feedme = false;
       billAcceptor.write(172);
       delay(500);
       billAcceptor.write(172);
       tft.fillScreen(TFT_BLACK);
       bill = int(billAcceptorValues[byteInInt - 1]);
-      tally = (tally + bill + coin);
+      tally = (tally + bill);
+      float tallyfloat = float(tally)/100;
       tft.setCursor(120, 40);
       tft.setTextColor(TFT_ORANGE);
       tft.setTextSize(10);
-      tft.setCursor(140, 80);
-      tft.println(String(tally) + currency);
+      tft.setCursor(60, 80);
+      tft.println(String(tallyfloat) + currency);
       tft.setCursor(180, 140);
       tft.setTextColor(TFT_WHITE);
       tft.setTextSize(2);
-      tft.println(String(bill) + " entered");
+      tft.println(String(float(bill)/100) + " entered");
       current_time = millis();
+      feedme = false;
     }
     if ( byteIntCoin >1){
       bill = 0;
       stored_time = millis();
       tft.fillScreen(TFT_BLACK);
-      bill = float(billAcceptorValues[byteIntCoin - 1]);
-      tally = (tally + bill + coin);
+      coin = float(coinAcceptorValues[byteIntCoin - 1]);
+      tally = (tally + coin);
+      float tallyfloat = float(tally)/100;
       tft.setCursor(120, 40);
       tft.setTextColor(TFT_ORANGE);
       tft.setTextSize(10);
-      tft.setCursor(140, 80);
-      tft.println(String(tally) + currency);
+      tft.setCursor(60, 80);
+      tft.println(String(tallyfloat) + currency);
       tft.setCursor(180, 140);
       tft.setTextColor(TFT_WHITE);
       tft.setTextSize(2);
-      tft.println(String(bill) + " entered");
+      tft.println(String(float(coin)/100) + " entered");
       current_time = millis();
+      feedme = false;
     }
   }
 }
@@ -542,20 +551,21 @@ void qrShowCodeLNURL(String message)
     {
       if (qrcode_getModule(&qrcoded, x, y))
       {
-        tft.fillRect(65 + 2 * x, 5 + 2 * y, 2, 2, TFT_BLACK);
+        tft.fillRect(120 + 4 * x, 20 + 4 * y, 4, 4, TFT_BLACK);
       }
       else
       {
-        tft.fillRect(65 + 2 * x, 5 + 2 * y, 2, 2, TFT_WHITE);
+        tft.fillRect(120 + 4 * x, 20 + 4 * y, 4, 4, TFT_WHITE);
       }
     }
   }
 
-  tft.setCursor(0, 220);
+  tft.setCursor(120, 290);
   tft.setTextSize(2);
   tft.setTextColor(TFT_BLACK, TFT_WHITE);
   tft.println(message);
 }
+
 
 /////////////////////////////////////
 /////////////UTIL STUFF//////////////
