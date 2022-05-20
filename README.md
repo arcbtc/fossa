@@ -10,16 +10,19 @@
 (coming soon)
 
 ## Parts (Project cost £80)
-* RPI_ILI9486 3.5 inch TFT (the type the Raspiblitz uses)
-* ESP32 NodeMCU 32s
-* Generic USB cable, with data (Used to make the Bill Acceptor config cable)
-* Breadboard (some bread boards are two small for esp32 and two are required)
-* DG600F(S) Multi Coin Acceptor
-* Storage box ("aluminum medicine box" you can buy from amazon works very well)
-* Screw Terminal block
-* 12v power supply (12v battery also works well, for unplugged version)
-* 12v to 5v step down converter
-* Male/female, female/female, male/male GPIO jumpers
+* RPI_ILI9486 3.5 inch TFT (the type the Raspiblitz uses) **£15**
+* ESP32 NodeMCU 32s **£3**
+* Generic USB cable, with data (used to make the Bill Acceptor config cable) **£2**
+* Breadboard (some bread boards are two small for esp32 and two are required) **£5**
+* DG600F(S) Multi Coin Acceptor **£30**
+* NV10USB+ bill acceptor (Seems to be plenty 2nd hand ones on ebay) **2nd hand £70**
+* Storage box ("aluminum medicine box" you can buy from amazon works very well) **£30**
+* Screw Terminal block **£1**
+* 12v power supply (12v battery also works well, for unplugged version) **£8**
+* 12v to 5v step down converter **£5**
+* Male/female, female/female, male/male GPIO jumpers **£5**
+
+### PROJECT COST <£200!
 
 ![fossaparts](https://user-images.githubusercontent.com/33088785/169497083-730cb959-dd4c-450c-8549-457fab2fb57c.jpeg)
 
