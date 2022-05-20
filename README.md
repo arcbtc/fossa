@@ -74,5 +74,7 @@ Copy the libraries from this projects <a href="/libraries">libraries</a> folder,
 
 Hit button on ATM boot (when you see the logo screen).
 
-* Connect to the portal over you phone (default password `ToTheMoon`).
+* Connect to the portal over you phone (default password: `ToTheMoon`).
 * Enter your credentials
+* Reboot ATM
+* Profit
