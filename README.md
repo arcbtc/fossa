@@ -72,7 +72,7 @@ Copy the libraries from this projects <a href="/libraries">libraries</a> folder,
 
 ![image](https://user-images.githubusercontent.com/33088785/169524860-203a6c07-eb61-4b68-b493-098ca6333c01.png)
 
-Hit button on ATM boot (when you see the logo screen).
+Hit button on ATM boot (when you see the logo screen to trigger access point).
 
 * Connect to the portal over you phone (default password: `ToTheMoon`).
 * Enter your credentials
