@@ -57,3 +57,7 @@ https://github.com/espressif/arduino-esp32#installation-instructions
 Copy the libraries from this projects <a href="/libraries">libraries</a> folder, to your `"/Arduino/libraries"` folder (usually in OS `"Home"` directory)
 
 ![BITCOIN](https://i.imgur.com/mCfnhZN.png)
+
+## Compiling/uploading
+
+Connect your ESP32 and hit upload. Tap the reset button on the ESP32 when Arduino has finished compiling and you get the little dots `...---...---` in the output
