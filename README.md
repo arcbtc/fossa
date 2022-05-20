@@ -22,9 +22,7 @@
 * 12v to 5v step down converter **£5**
 * Male/female, female/female, male/male GPIO jumpers **£5**
 
-
-![fossaparts](https://user-images.githubusercontent.com/33088785/169497083-730cb959-dd4c-450c-8549-457fab2fb57c.jpeg)
-
+![fossaparts](https://user-images.githubusercontent.com/33088785/169537001-983c7e17-1163-4f13-9ac7-c695e0e7277f.jpeg)
 
 ## Screen wiring
 
