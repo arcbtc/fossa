@@ -22,7 +22,7 @@ https://www.youtube.com/watch?v=1FeE74sDNGA
 * DG600F(S) Multi Coin Acceptor
 * Storage box ("aluminum medicine box" you can buy from amazon works very well)
 * Screw Terminal block
-* 12v power supply
+* 12v power supply (12v battery also works well, for unplugged version)
 * 12v to 5v step down converter
 * Male/female, female/female, male/male GPIO jumpers
 
