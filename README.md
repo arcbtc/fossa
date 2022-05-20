@@ -60,4 +60,19 @@ Copy the libraries from this projects <a href="/libraries">libraries</a> folder,
 
 ## Compiling/uploading
 
-Connect your ESP32 and hit upload. Tap the reset button on the ESP32 when Arduino has finished compiling and you get the little dots `...---...---` in the output
+* Connect your ESP32 and hit upload. 
+* Tap the reset button on the ESP32 when Arduino has finished compiling and you get the little dots `...---...---` in monitor.
+
+## Configuring
+
+* Go to your LNbits install (you can use our demo server for testing).
+* Enable LNURLDevices extension.
+* Create an ATM attached to wallet, select a currency and set percentage profit
+* Copy the LNURLATM string
+
+![image](https://user-images.githubusercontent.com/33088785/169524860-203a6c07-eb61-4b68-b493-098ca6333c01.png)
+
+Hit button on ATM boot (when you see the logo screen).
+
+* Connect to the portal over you phone (default password `ToTheMoon`).
+* Enter your credentials
