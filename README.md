@@ -15,15 +15,16 @@
 https://www.youtube.com/watch?v=1FeE74sDNGA
 
 ## Parts (Project cost £80)
-* ILI9341 2.8 TFT
+* RPI_ILI9486 3.5 inch TFT (the type the Raspiblitz uses)
 * ESP32 NodeMCU 32s
-* USB extension
-* Breadboard
+* Generic USB cable, with data (Used to make the Bill Acceptor config cable)
+* Breadboard (some bread boards are two small for esp32 and two are required)
 * DG600F(S) Multi Coin Acceptor
-* Storage Box 
-* Screw Terminal
-* 5v to 12v step up cable
-* Male/Female GPIO jumpers
+* Storage box ("aluminum medicine box" you can buy from amazon works very well)
+* Screw Terminal block
+* 12v power supply
+* 12v to 5v step down converter
+* Male/female, female/female, male/male GPIO jumpers
 
 ![fossaparts](https://user-images.githubusercontent.com/33088785/169497083-730cb959-dd4c-450c-8549-457fab2fb57c.jpeg)
 
