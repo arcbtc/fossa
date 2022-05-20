@@ -38,6 +38,8 @@
 
 ## Relay wiring
 
+![image](https://user-images.githubusercontent.com/33088785/169520286-a6c9c1bc-627b-494c-a9da-d752c15e56c6.png)
+
 ## Installing arduino + libraries
 
 Install the Arduino IDE,<br>
