@@ -25,9 +25,7 @@ https://www.youtube.com/watch?v=1FeE74sDNGA
 * 5v to 12v step up cable
 * Male/Female GPIO jumpers
 
-<p align="center">
-  <img src="https://i.imgur.com/h4DpLNc.jpg">
-</p>
+![fossaparts](https://user-images.githubusercontent.com/33088785/169497083-730cb959-dd4c-450c-8549-457fab2fb57c.jpeg)
 
 ## Installing arduino + libraries
 
