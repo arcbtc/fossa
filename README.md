@@ -40,6 +40,10 @@
 
 ![image](https://user-images.githubusercontent.com/33088785/169520286-a6c9c1bc-627b-494c-a9da-d752c15e56c6.png)
 
+## Button wiring
+
+![image](https://user-images.githubusercontent.com/33088785/169520797-d7256bb8-8b4c-48c6-b480-11918d3df497.png)
+
 ## Installing arduino + libraries
 
 Install the Arduino IDE,<br>
