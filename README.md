@@ -24,17 +24,19 @@
 ![fossaparts](https://user-images.githubusercontent.com/33088785/169497083-730cb959-dd4c-450c-8549-457fab2fb57c.jpeg)
 
 
-## Wiring the screen
+## Screen wiring
 
 ![image](https://user-images.githubusercontent.com/33088785/169515768-183ccd70-8f3b-4334-a4f0-9ccccdbcbf93.png)
 
-## Wiring the coin acceptor
+## Coin acceptor wiring
 
 ![image](https://user-images.githubusercontent.com/33088785/169517488-65bfba37-0c9c-4dc4-9533-c6c4517cc1ff.png)
 
-## Wiring the bill acceptor
+## Bill acceptor wiring
 
 ![image](https://user-images.githubusercontent.com/33088785/169518370-2bdf7acd-e5f9-4d34-bd34-26854b805704.png)
+
+## Relay wiring
 
 ## Installing arduino + libraries
 
