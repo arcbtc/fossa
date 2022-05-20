@@ -57,7 +57,3 @@ https://github.com/espressif/arduino-esp32#installation-instructions
 Copy the libraries from this projects <a href="/libraries">libraries</a> folder, to your `"/Arduino/libraries"` folder (usually in OS `"Home"` directory)
 
 ![BITCOIN](https://i.imgur.com/mCfnhZN.png)
-
-## Wiring
-
-![ESP32 GPIO Map](https://i.imgur.com/sRI8A6M.png)
