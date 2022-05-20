@@ -34,12 +34,7 @@
 
 ## Wiring the bill acceptor
 
-| BILL ACCEPTOR PINS  | ESP32 | POWER SUPPLY |
-| ------------- | ------------- | ------------- | 
-| 1  | 3  | NA  |
-| 5  | 1  | NA  |
-| 15  (GND) | GND  | NA  |
-| 16 (12v)  | NA  | POSITIVE  |
+![image](https://user-images.githubusercontent.com/33088785/169518370-2bdf7acd-e5f9-4d34-bd34-26854b805704.png)
 
 ## Installing arduino + libraries
 
