@@ -5,14 +5,9 @@
 
 > <i>Join our <a href="https://t.me/makerbits">telegram support/chat</a>.</i>
 
-<p align="center">
-  <img src="https://i.imgur.com/68MP0xP.jpg">
-  <img src="https://i.imgur.com/JFVVKwo.jpg">
-</p>
+## Video tutorial
 
-## Tutorial
-
-https://www.youtube.com/watch?v=1FeE74sDNGA
+(coming soon)
 
 ## Parts (Project cost £80)
 * RPI_ILI9486 3.5 inch TFT (the type the Raspiblitz uses)
