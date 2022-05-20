@@ -54,10 +54,7 @@ https://www.arduino.cc/en/Main/Software
 Install the ESP32 hardware,<br>
 https://github.com/espressif/arduino-esp32#installation-instructions
 
-From "Manage Libraries" install,<br>
-* TFT_eSPI
-* ArduinoJson
-* qrcode (By Richard Moore)
+Copy the libraries from this projects <a href="/libraries">libraries</a> folder, to your `"/Arduino/libraries"` folder (usually in OS `"Home"` directory)
 
 ![BITCOIN](https://i.imgur.com/mCfnhZN.png)
 
