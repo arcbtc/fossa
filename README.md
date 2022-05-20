@@ -28,6 +28,16 @@
 
 ![image](https://user-images.githubusercontent.com/33088785/169515768-183ccd70-8f3b-4334-a4f0-9ccccdbcbf93.png)
 
+## Wiring the coin acceptor
+
+| COIN ACCEPTOR PINS  | ESP32 | POWER SUPPLY |
+| ------------- | ------------- | ------------- | 
+| 5  | NA  | NA  |
+| 4  | NA  | NA  |
+| 3 (GND)  | NEGATIVE | NA  |
+| 2  (Serial out) | 9  | NA  |
+| 1 (12v)  | NA  | POSITIVE  |
+
 ## Installing arduino + libraries
 
 Install the Arduino IDE,<br>
