@@ -30,13 +30,16 @@
 
 ## Wiring the coin acceptor
 
-| COIN ACCEPTOR PINS  | ESP32 | POWER SUPPLY |
+![image](https://user-images.githubusercontent.com/33088785/169517488-65bfba37-0c9c-4dc4-9533-c6c4517cc1ff.png)
+
+## Wiring the bill acceptor
+
+| BILL ACCEPTOR PINS  | ESP32 | POWER SUPPLY |
 | ------------- | ------------- | ------------- | 
-| 5  | NA  | NA  |
-| 4  | NA  | NA  |
-| 3 (GND)  | NEGATIVE | NA  |
-| 2  (Serial out) | 9  | NA  |
-| 1 (12v)  | NA  | POSITIVE  |
+| 1  | 3  | NA  |
+| 5  | 1  | NA  |
+| 15  (GND) | GND  | NA  |
+| 16 (12v)  | NA  | POSITIVE  |
 
 ## Installing arduino + libraries
 
