@@ -23,6 +23,11 @@
 
 ![fossaparts](https://user-images.githubusercontent.com/33088785/169497083-730cb959-dd4c-450c-8549-457fab2fb57c.jpeg)
 
+
+## Wiring the screen
+
+![image](https://user-images.githubusercontent.com/33088785/169515768-183ccd70-8f3b-4334-a4f0-9ccccdbcbf93.png)
+
 ## Installing arduino + libraries
 
 Install the Arduino IDE,<br>
