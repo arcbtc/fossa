@@ -16,7 +16,7 @@
 * Breadboard (some bread boards are two small for esp32 and two are required) **£5**
 * DG600F(S) Multi Coin Acceptor **£30**
 * NV10USB+ bill acceptor (Seems to be plenty 2nd hand ones on ebay) **£70**
-* Storage box ("aluminum medicine box" you can buy from amazon works very well) **£30**
+* Storage box (a type of readily available aluminum boxes that are perfect can be found with "aluminum medicine box" search) **£30**
 * Screw Terminal block **£1**
 * 12v power supply (12v battery also works well, for unplugged version) **£8**
 * 12v to 5v step down converter **£5**
