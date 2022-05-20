@@ -9,7 +9,7 @@
 
 (coming soon)
 
-## Parts (Project cost £80)
+## Parts (PROJECT COST UNDER £200!)
 * RPI_ILI9486 3.5 inch TFT (the type the Raspiblitz uses) **£15**
 * ESP32 NodeMCU 32s **£3**
 * Generic USB cable, with data (used to make the Bill Acceptor config cable) **£2**
@@ -22,7 +22,6 @@
 * 12v to 5v step down converter **£5**
 * Male/female, female/female, male/male GPIO jumpers **£5**
 
-### PROJECT COST <£200!
 
 ![fossaparts](https://user-images.githubusercontent.com/33088785/169497083-730cb959-dd4c-450c-8549-457fab2fb57c.jpeg)
 
