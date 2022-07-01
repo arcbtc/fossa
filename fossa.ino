@@ -48,10 +48,21 @@ String preparedURL;
 int randomPin;
 int maxamount;
 int credit = 0;
-
+int coin = 0;
+int bill = 0;
+int tally = 0;
 int billAcceptorValues[6] = {};
 int coinAcceptorValues[6] = {};
 
+unsigned long stored_time = 0;
+unsigned long current_time = 0;
+
+bool active = true;
+bool feedme = true;
+bool paydisplay = false;
+  
+
+  
 const byte BUTTON_PIN_A = 39;
 Button BTNA(BUTTON_PIN_A);
 
@@ -349,37 +360,19 @@ void setup() {
 /////////////////////////////////////
 
 void loop(){
-  unsigned long stored_time = 0;
-  unsigned long current_time = 0;
-  bool active = true;
-  bool feedme = true;
-  bool paydisplay = false;
-  int coin = 0;
-  int bill = 0;
-  int tally = 0;
+  stored_time = 0;
+  current_time = 0;
+  active = true;
+  feedme = true;
+  paydisplay = false;
+  coin = 0;
+  bill = 0;
+  tally = 0;
   tft.fillScreen(TFT_BLACK);
   while(active == true){
     if(feedme == true){
       feedmefiat();
     }
-    if(stored_time > 1 && current_time - stored_time > 10000){
-      active = false;
-      paydisplay = true;
-      digitalWrite(11, LOW);
-    }
-    
-    while(paydisplay){
-      dataIn = String(tally);
-      makeLNURL();
-      qrShowCodeLNURL("PRESS BUTTON TO EXIT");
-      bool buttonbool = false;
-      while(buttonbool == false){
-        buttonbool = BTNA.read();
-      }
-      paydisplay = false;
-      active = false;
-    }
-
     byte byteIn = 0;
     int byteInInt = 0;
     int byteIntCoin = 0;
@@ -388,6 +381,7 @@ void loop(){
     byteIntCoin = coinAcceptor.read();
     printbyte(byteInInt);
     current_time = millis();
+    
     if ( byteInInt >= 1 && byteInInt <= 3){
       bill = 0;
       stored_time = millis();
@@ -399,15 +393,7 @@ void loop(){
       bill = int(billAcceptorValues[byteInInt - 1]);
       tally = (tally + bill);
       float tallyfloat = float(tally)/100;
-      tft.setCursor(120, 40);
-      tft.setTextColor(TFT_ORANGE);
-      tft.setTextSize(10);
-      tft.setCursor(60, 80);
-      tft.println(String(tallyfloat) + currency);
-      tft.setCursor(180, 140);
-      tft.setTextColor(TFT_WHITE);
-      tft.setTextSize(2);
-      tft.println(String(float(bill)/100) + " entered");
+      displayAmount();
       current_time = millis();
       feedme = false;
     }
@@ -418,17 +404,26 @@ void loop(){
       coin = float(coinAcceptorValues[byteIntCoin - 1]);
       tally = (tally + coin);
       float tallyfloat = float(tally)/100;
-      tft.setCursor(120, 40);
-      tft.setTextColor(TFT_ORANGE);
-      tft.setTextSize(10);
-      tft.setCursor(60, 80);
-      tft.println(String(tallyfloat) + currency);
-      tft.setCursor(180, 140);
-      tft.setTextColor(TFT_WHITE);
-      tft.setTextSize(2);
-      tft.println(String(float(coin)/100) + " entered");
+      displayAmount();
       current_time = millis();
       feedme = false;
+    }
+    if(stored_time > 1 && current_time - stored_time > 5000){
+      paydisplay = true;
+      digitalWrite(11, LOW);
+    }
+    while(paydisplay == true){
+      dataIn = String(tally);
+      makeLNURL();
+      qrShowCodeLNURL("PRESS BUTTON TO EXIT");
+      bool buttonbool = false;
+      while(buttonbool == false){
+        buttonbool = BTNA.read();
+        if(buttonbool){
+          paydisplay = false;
+          active = false;
+        }
+      }
     }
   }
 }
@@ -437,6 +432,18 @@ void loop(){
 ///////////DISPLAY STUFF/////////////
 /////////////////////////////////////
 
+
+void displayAmount(){
+  tft.setCursor(120, 40);
+  tft.setTextColor(TFT_ORANGE);
+  tft.setTextSize(10);
+  tft.setCursor(60, 80);
+  tft.println(String(tallyfloat) + currency);
+  tft.setCursor(180, 140);
+  tft.setTextColor(TFT_WHITE);
+  tft.setTextSize(2);
+  tft.println(String(float(coin)/100) + " entered");
+}
 void message(String note, bool blackscreen)
 {
   if(blackscreen == true){
