@@ -46,13 +46,13 @@ String dataIn = "0";
 String preparedURL;
 
 int randomPin;
-int maxamount;
+float maxamount;
 int credit = 0;
-int coin = 0;
-int bill = 0;
-int tally = 0;
-int billAcceptorValues[6] = {};
-int coinAcceptorValues[6] = {};
+float coin = 0;
+float bill = 0;
+float tally = 0;
+String billAcceptorValues[] = {"","","","","",""};
+String coinAcceptorValues[] = {"","","","","",""};
 
 unsigned long stored_time = 0;
 unsigned long current_time = 0;
@@ -60,9 +60,7 @@ unsigned long current_time = 0;
 bool active = true;
 bool feedme = true;
 bool paydisplay = false;
-  
 
-  
 const byte BUTTON_PIN_A = 39;
 Button BTNA(BUTTON_PIN_A);
 
@@ -72,7 +70,7 @@ Button BTNA(BUTTON_PIN_A);
 
 bool triggerAp = false; 
 
-String content = "<h1>ATM Access-point</br>For easy variable and wifi connection setting</h1>";
+String content = "<h1>ATM Access-point</br>For easy variable setting</h1>";
 
 // custom access point pages
 static const char PAGE_ELEMENTS[] PROGMEM = R"(
@@ -109,19 +107,19 @@ static const char PAGE_ELEMENTS[] PROGMEM = R"(
       "name": "coinmech",
       "type": "ACInput",
       "label": "Coin values comma seperated",
-      "value": ""
+      "value": "0.01,0.02,0.05,0.10,0.20,0.50,1"
     },
     {
       "name": "billmech",
       "type": "ACInput",
       "label": "Note values comma seperated",
-      "value": ""
+      "value": "5,10,20"
     },
     {
       "name": "maxamount",
       "type": "ACInput",
       "label": "Max withdrawable in fiat",
-      "value": ""
+      "value": "20"
     },
     {
       "name": "load",
@@ -205,7 +203,8 @@ void setup() {
   while (timer < 2000)
   {
     digitalWrite(2, LOW);
-    if(BTNA.read()){
+    BTNA.read();
+    if(BTNA.wasReleased()){
       Serial.println("Launch portal");
       triggerAp = true;
       timer = 5000;
@@ -242,22 +241,22 @@ void setup() {
     const JsonObject maRoot2 = doc[2];
     const char *maRoot2Char = maRoot2["value"];
     const String billmech = maRoot2Char;
-    billAcceptorValues[0] = getValue(billmech, ',', 0).toInt();
-    billAcceptorValues[1] = getValue(billmech, ',', 1).toInt();
-    billAcceptorValues[2] = getValue(billmech, ',', 2).toInt();
-    billAcceptorValues[3] = getValue(billmech, ',', 3).toInt();
-    billAcceptorValues[4] = getValue(billmech, ',', 4).toInt();
-    billAcceptorValues[5] = getValue(billmech, ',', 5).toInt();
+    billAcceptorValues[0] = getValue(billmech, ',', 0);
+    billAcceptorValues[1] = getValue(billmech, ',', 1);
+    billAcceptorValues[2] = getValue(billmech, ',', 2);
+    billAcceptorValues[3] = getValue(billmech, ',', 3);
+    billAcceptorValues[4] = getValue(billmech, ',', 4);
+    billAcceptorValues[5] = getValue(billmech, ',', 5);
     
     const JsonObject maRoot3 = doc[3];
     const char *maRoot3Char = maRoot3["value"];
     const String coinmech = maRoot2Char;
-    coinAcceptorValues[0] = getValue(coinmech, ',', 0).toInt();
-    coinAcceptorValues[1] = getValue(coinmech, ',', 1).toInt();
-    coinAcceptorValues[2] = getValue(coinmech, ',', 2).toInt();
-    coinAcceptorValues[3] = getValue(coinmech, ',', 3).toInt();
-    coinAcceptorValues[4] = getValue(coinmech, ',', 4).toInt();
-    coinAcceptorValues[5] = getValue(coinmech, ',', 5).toInt();
+    coinAcceptorValues[0] = getValue(coinmech, ',', 0);
+    coinAcceptorValues[1] = getValue(coinmech, ',', 1);
+    coinAcceptorValues[2] = getValue(coinmech, ',', 2);
+    coinAcceptorValues[3] = getValue(coinmech, ',', 3);
+    coinAcceptorValues[4] = getValue(coinmech, ',', 4);
+    coinAcceptorValues[5] = getValue(coinmech, ',', 5);
 
     const JsonObject maRoot4 = doc[4];
     const char *maRoot4Char = maRoot4["value"];
@@ -390,9 +389,8 @@ void loop(){
       delay(500);
       billAcceptor.write(172);
       tft.fillScreen(TFT_BLACK);
-      bill = int(billAcceptorValues[byteInInt - 1]);
+      bill = billAcceptorValues[byteInInt - 1].toFloat();
       tally = (tally + bill);
-      float tallyfloat = float(tally)/100;
       displayAmount();
       current_time = millis();
       feedme = false;
@@ -401,9 +399,8 @@ void loop(){
       bill = 0;
       stored_time = millis();
       tft.fillScreen(TFT_BLACK);
-      coin = float(coinAcceptorValues[byteIntCoin - 1]);
+      coin = coinAcceptorValues[byteIntCoin - 1].toFloat();
       tally = (tally + coin);
-      float tallyfloat = float(tally)/100;
       displayAmount();
       current_time = millis();
       feedme = false;
@@ -418,8 +415,8 @@ void loop(){
       qrShowCodeLNURL("PRESS BUTTON TO EXIT");
       bool buttonbool = false;
       while(buttonbool == false){
-        buttonbool = BTNA.read();
-        if(buttonbool){
+        BTNA.read();
+        if(BTNA.wasReleased()){
           paydisplay = false;
           active = false;
         }
@@ -438,11 +435,11 @@ void displayAmount(){
   tft.setTextColor(TFT_ORANGE);
   tft.setTextSize(10);
   tft.setCursor(60, 80);
-  tft.println(String(tallyfloat) + currency);
+  tft.println(String(tally) + currency);
   tft.setCursor(180, 140);
   tft.setTextColor(TFT_WHITE);
   tft.setTextSize(2);
-  tft.println(String(float(coin)/100) + " entered");
+  tft.println(String(coin) + " entered");
 }
 void message(String note, bool blackscreen)
 {
