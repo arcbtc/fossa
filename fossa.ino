@@ -11,7 +11,6 @@ fs::SPIFFSFS &FlashFS = SPIFFS;
 #include <SPI.h>
 #include <TFT_eSPI.h>
 #include <Wire.h>
-#include <JC_Button.h>
 #include <HardwareSerial.h>
 #include <ArduinoJson.h>
 
@@ -61,8 +60,16 @@ bool active = true;
 bool feedme = true;
 bool paydisplay = false;
 
-const byte BUTTON_PIN_A = 39;
-Button BTNA(BUTTON_PIN_A);
+struct Button {
+  const uint8_t PIN;
+  bool pressed;
+};
+
+Button button1 = {13, false};
+
+void IRAM_ATTR isr() {
+  button1.pressed = true;
+}
 
 /////////////////////////////////////
 ////////////////PORTAL///////////////
@@ -188,8 +195,9 @@ AutoConnectAux saveAux;
 /////////////////////////////////////
 
 void setup() {
-  Serial.begin(115200);
-  BTNA.begin();
+  Serial.begin(9600);
+  pinMode(button1.PIN, INPUT_PULLUP);
+  attachInterrupt(button1.PIN, isr, FALLING);
   
   tft.init();
   tft.setRotation(1);
@@ -203,17 +211,18 @@ void setup() {
   while (timer < 2000)
   {
     digitalWrite(2, LOW);
-    BTNA.read();
-    if(BTNA.wasReleased()){
+    if (button1.pressed) {
       Serial.println("Launch portal");
       triggerAp = true;
       timer = 5000;
+      button1.pressed = false;
     }
     digitalWrite(2, HIGH);
     timer = timer + 100;
     delay(300);
   }
-  
+
+
  // h.begin();
   FlashFS.begin(FORMAT_ON_FAIL);
   SPIFFS.begin(true);
