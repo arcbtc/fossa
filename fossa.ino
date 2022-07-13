@@ -424,8 +424,7 @@ void loop(){
       qrShowCodeLNURL("PRESS BUTTON TO EXIT");
       bool buttonbool = false;
       while(buttonbool == false){
-        BTNA.read();
-        if(BTNA.wasReleased()){
+        if (button1.pressed) {
           paydisplay = false;
           active = false;
         }
