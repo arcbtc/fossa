@@ -28,6 +28,9 @@ HardwareSerial billAcceptor(2);
 /////////////////////////////////
          
 bool format = false; // true for formatting SPIFFS, use once, then make false and reflash
+#define billRX 3;
+#define billTX 1;
+#define coinTX 9;
 
 /////////////////////////////////
 /////////////////////////////////
@@ -52,6 +55,8 @@ float bill = 0;
 float tally = 0;
 String billAcceptorValues[] = {"","","","","",""};
 String coinAcceptorValues[] = {"","","","","",""};
+bool billBool = false;
+bool coinBool = false;
 
 unsigned long stored_time = 0;
 unsigned long current_time = 0;
@@ -113,14 +118,14 @@ static const char PAGE_ELEMENTS[] PROGMEM = R"(
     {
       "name": "coinmech",
       "type": "ACInput",
-      "label": "Coin values comma seperated",
-      "value": "0.01,0.02,0.05,0.10,0.20,0.50,1"
+      "label": "Coin values comma seperated, ie 0.01,0.02,0.05,0.10,0.20,0.50,1",
+      "value": ""
     },
     {
       "name": "billmech",
       "type": "ACInput",
-      "label": "Note values comma seperated",
-      "value": "5,10,20"
+      "label": "Note values comma seperated, ie 5,10,20",
+      "value": ""
     },
     {
       "name": "maxamount",
@@ -250,22 +255,32 @@ void setup() {
     const JsonObject maRoot2 = doc[2];
     const char *maRoot2Char = maRoot2["value"];
     const String billmech = maRoot2Char;
-    billAcceptorValues[0] = getValue(billmech, ',', 0);
-    billAcceptorValues[1] = getValue(billmech, ',', 1);
-    billAcceptorValues[2] = getValue(billmech, ',', 2);
-    billAcceptorValues[3] = getValue(billmech, ',', 3);
-    billAcceptorValues[4] = getValue(billmech, ',', 4);
-    billAcceptorValues[5] = getValue(billmech, ',', 5);
+    if(billmech == ""){
+      billAcceptorValues[0] = getValue(billmech, ',', 0);
+      billAcceptorValues[1] = getValue(billmech, ',', 1);
+      billAcceptorValues[2] = getValue(billmech, ',', 2);
+      billAcceptorValues[3] = getValue(billmech, ',', 3);
+      billAcceptorValues[4] = getValue(billmech, ',', 4);
+      billAcceptorValues[5] = getValue(billmech, ',', 5);
+    }
+    else{
+      billBool = false;
+    }
     
     const JsonObject maRoot3 = doc[3];
     const char *maRoot3Char = maRoot3["value"];
     const String coinmech = maRoot2Char;
-    coinAcceptorValues[0] = getValue(coinmech, ',', 0);
-    coinAcceptorValues[1] = getValue(coinmech, ',', 1);
-    coinAcceptorValues[2] = getValue(coinmech, ',', 2);
-    coinAcceptorValues[3] = getValue(coinmech, ',', 3);
-    coinAcceptorValues[4] = getValue(coinmech, ',', 4);
-    coinAcceptorValues[5] = getValue(coinmech, ',', 5);
+    if(coinmech == ""){
+      coinAcceptorValues[0] = getValue(coinmech, ',', 0);
+      coinAcceptorValues[1] = getValue(coinmech, ',', 1);
+      coinAcceptorValues[2] = getValue(coinmech, ',', 2);
+      coinAcceptorValues[3] = getValue(coinmech, ',', 3);
+      coinAcceptorValues[4] = getValue(coinmech, ',', 4);
+      coinAcceptorValues[5] = getValue(coinmech, ',', 5);
+    }
+    else{
+      coinBool = false;
+    }
 
     const JsonObject maRoot4 = doc[4];
     const char *maRoot4Char = maRoot4["value"];
@@ -349,17 +364,21 @@ void setup() {
     message("Restart/launch portal!", true);
     delay(99999999);
   }
-
-  message("Starting bill acceptor", true);
-  billAcceptor.begin(300, SERIAL_8N2, 3, 1);
-  coinAcceptor.begin(4800, SERIAL_8N1, 9);
   
-  billAcceptor.write(184);
-  delay(1000);
-  while(!billAcceptor.available())
-  {
-    billAcceptor.write(182);
-    billAcceptor.read();
+  if(billBool){
+    message("Starting acceptor(s)", true);
+    billAcceptor.begin(300, SERIAL_8N2, billRX, billTX);
+    billAcceptor.write(184);
+    delay(1000);
+    while(!billAcceptor.available())
+    {
+      billAcceptor.write(182);
+      billAcceptor.read();
+    }
+  }
+
+  if(coinBool){
+    coinAcceptor.begin(4800, SERIAL_8N1, coinRX);
   }
 }
 
@@ -381,40 +400,55 @@ void loop(){
     if(feedme == true){
       feedmefiat();
     }
+
     byte byteIn = 0;
     int byteInInt = 0;
     int byteIntCoin = 0;
-    byteIn = billAcceptor.read();
-    byteInInt = billAcceptor.read();
-    byteIntCoin = coinAcceptor.read();
-    printbyte(byteInInt);
+
+    if(billBool){
+      byteIn = billAcceptor.read();
+      byteInInt = billAcceptor.read();
+    }
+    if(coinBool){
+      byteIntCoin = coinAcceptor.read();
+    }
+
     current_time = millis();
-    
-    if ( byteInInt >= 1 && byteInInt <= 3){
-      bill = 0;
-      stored_time = millis();
-      delay(1000);
-      billAcceptor.write(172);
-      delay(500);
-      billAcceptor.write(172);
-      tft.fillScreen(TFT_BLACK);
-      bill = billAcceptorValues[byteInInt - 1].toFloat();
-      tally = (tally + bill);
-      displayAmount();
-      current_time = millis();
-      feedme = false;
+    if(billBool){
+      if ( byteInInt >= 1 && byteInInt <= 3){
+        bill = 0;
+        stored_time = millis();
+        delay(1000);
+        billAcceptor.write(172);
+        delay(500);
+        billAcceptor.write(172);
+        tft.fillScreen(TFT_BLACK);
+        bill = billAcceptorValues[byteInInt - 1].toFloat();
+        tally = (tally + bill);
+        displayAmount();
+        current_time = millis();
+        feedme = false;
+      }
     }
-    if ( byteIntCoin >1){
-      bill = 0;
-      stored_time = millis();
-      tft.fillScreen(TFT_BLACK);
-      coin = coinAcceptorValues[byteIntCoin - 1].toFloat();
-      tally = (tally + coin);
-      displayAmount();
-      current_time = millis();
-      feedme = false;
+    if(coinBool){
+      if ( byteIntCoin >1){
+        bill = 0;
+        stored_time = millis();
+        tft.fillScreen(TFT_BLACK);
+        coin = coinAcceptorValues[byteIntCoin - 1].toFloat();
+        tally = (tally + coin);
+        displayAmount();
+        current_time = millis();
+        feedme = false;
+      }
     }
+
     if(stored_time > 1 && current_time - stored_time > 5000){
+      paydisplay = true;
+      digitalWrite(11, LOW);
+    }
+    if(tally > maxamount){
+      message("Max amount (" + maxamount + ") exceeded", true);
       paydisplay = true;
       digitalWrite(11, LOW);
     }
