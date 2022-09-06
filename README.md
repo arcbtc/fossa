@@ -20,15 +20,15 @@
 * 12v to 5v step down converter **£5**
 * Male/female GPIO jumpers **£5**
 
-![fossaparts](https://user-images.githubusercontent.com/33088785/169537001-983c7e17-1163-4f13-9ac7-c695e0e7277f.jpeg)
+![169537001-983c7e17-1163-4f13-9ac7-c695e0e7277f](https://user-images.githubusercontent.com/33088785/188747774-be2a7ef2-e894-4de0-8333-c38bff823510.jpeg)
 
 ## Coin acceptor wiring
 
-![image](https://user-images.githubusercontent.com/33088785/169517488-65bfba37-0c9c-4dc4-9533-c6c4517cc1ff.png)
+![169517488-65bfba37-0c9c-4dc4-9533-c6c4517cc1ff](https://user-images.githubusercontent.com/33088785/188748943-960a15fd-f0c8-48e9-870a-af6cde1a3b31.png)
 
 ## Bill acceptor wiring
 
-![image](https://user-images.githubusercontent.com/33088785/169518370-2bdf7acd-e5f9-4d34-bd34-26854b805704.png)
+![169518370-2bdf7acd-e5f9-4d34-bd34-26854b805704](https://user-images.githubusercontent.com/33088785/188748970-7f463a3b-0594-4902-b8c9-0e084029618d.png)
 
 ## Installing arduino + libraries
 
