@@ -42,11 +42,6 @@ Copy the libraries from this projects <a href="/libraries">libraries</a> folder,
 
 ![BITCOIN](https://i.imgur.com/mCfnhZN.png)
 
-## Compiling/uploading
-
-* Connect your ESP32 and hit upload. 
-* Tap the reset button on the ESP32 when Arduino has finished compiling and you get the little dots `...---...---` in monitor.
-
 ## Configuring
 
 * Go to your LNbits install (you can use our demo server for testing).
