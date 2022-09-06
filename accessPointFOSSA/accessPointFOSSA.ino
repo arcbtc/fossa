@@ -1,4 +1,24 @@
 
+// FOSSA WITH ACCESS-POINT
+
+//========================================================//
+//============EDIT IF USING DIFFERENT HARDWARE============//
+//========================================================//
+
+bool format = false; // true for formatting FOSSA memory, use once, then make false and reflash
+
+#define BTN1 39 //Screen tap button
+
+#define RX1 32 //Bill acceptor
+#define TX1 33 //Bill acceptor
+
+#define TX2 4 //Coinmech
+#define INHIBITMECH 2 //Coinmech
+
+//========================================================//
+//========================================================//
+//========================================================//
+
 #include <WiFi.h>
 #include <WebServer.h>
 #include <FS.h>
@@ -13,6 +33,7 @@ fs::SPIFFSFS &FlashFS = SPIFFS;
 #include <Wire.h>
 #include <HardwareSerial.h>
 #include <ArduinoJson.h>
+#include <JC_Button.h>
 
 #include <Hash.h>
 #include "qrcoded.h"
@@ -20,61 +41,33 @@ fs::SPIFFSFS &FlashFS = SPIFFS;
 
 #define PARAM_FILE "/elements.json"
 
-HardwareSerial coinAcceptor(1);
-HardwareSerial billAcceptor(2);
-
-/////////////////////////////////
-///////////CHANGE////////////////
-/////////////////////////////////
-         
-bool format = false; // true for formatting SPIFFS, use once, then make false and reflash
-#define billRX 3;
-#define billTX 1;
-#define coinTX 9;
-
-/////////////////////////////////
-/////////////////////////////////
-
-byte noteInEscrow = 0;
-
-String password;
 String qrData;
-String currency = "GBP";
+String password;
 String apPassword = "ToTheMoon1"; //default WiFi AP password
 String baseURLATM;
 String secretATM;
 String currencyATM = "";
-String dataIn = "0";
-String preparedURL;
 
-int randomPin;
-float maxamount;
-int credit = 0;
-float coin = 0;
-float bill = 0;
-float tally = 0;
-String billAcceptorValues[] = {"","","","","",""};
-String coinAcceptorValues[] = {"","","","","",""};
-bool billBool = false;
-bool coinBool = false;
+int bills;
+float coins;
+float total;
+int maxamount;
 
-unsigned long stored_time = 0;
-unsigned long current_time = 0;
+bool billBool = true;
+bool coinBool = true;
 
-bool active = true;
-bool feedme = true;
-bool paydisplay = false;
+int moneyTimer = 0;
 
-struct Button {
-  const uint8_t PIN;
-  bool pressed;
-};
+// Coin and Bill Acceptor amounts
+int billAmountInt[5] = {5, 10, 20, 50, 100};
+float coinAmountFloat[6] = {0.02, 0.05, 0.1, 0.2, 0.5, 1};
+int billAmountSize = sizeof(billAmountInt) / sizeof(int);
+float coinAmountSize = sizeof(coinAmountFloat) / sizeof(float);
 
-Button button1 = {13, false};
+HardwareSerial SerialPort1(1);
+HardwareSerial SerialPort2(2);
 
-void IRAM_ATTR isr() {
-  button1.pressed = true;
-}
+Button BTNA(BTN1);
 
 /////////////////////////////////////
 ////////////////PORTAL///////////////
@@ -199,36 +192,31 @@ AutoConnectAux saveAux;
 ////////////////SETUP////////////////
 /////////////////////////////////////
 
-void setup() {
-  Serial.begin(9600);
-  pinMode(button1.PIN, INPUT_PULLUP);
-  attachInterrupt(button1.PIN, isr, FALLING);
+void setup()  
+{  
+  BTNA.begin();
   
   tft.init();
   tft.setRotation(1);
- 
-  pinMode(11, OUTPUT);  
-  digitalWrite(11, HIGH);
-  
+  tft.invertDisplay(false);
+  tft.fillScreen(TFT_BLACK);
   logo();
+
   int timer = 0;
-  
-  while (timer < 2000)
-  {
-    digitalWrite(2, LOW);
-    if (button1.pressed) {
-      Serial.println("Launch portal");
-      triggerAp = true;
+  while(timer < 2000){
+    BTNA.read();
+    if (BTNA.wasReleased()) {
       timer = 5000;
-      button1.pressed = false;
+      triggerAp = true;
     }
-    digitalWrite(2, HIGH);
     timer = timer + 100;
-    delay(300);
+    delay(100);
   }
+  SerialPort1.begin(300, SERIAL_8N2, TX1, RX1);
+  SerialPort2.begin(4800, SERIAL_8N1, TX2);
 
+  pinMode(INHIBITMECH, OUTPUT); 
 
- // h.begin();
   FlashFS.begin(FORMAT_ON_FAIL);
   SPIFFS.begin(true);
   if(format == true){
@@ -256,30 +244,22 @@ void setup() {
     const char *maRoot2Char = maRoot2["value"];
     const String billmech = maRoot2Char;
     if(billmech == ""){
-      billAcceptorValues[0] = getValue(billmech, ',', 0);
-      billAcceptorValues[1] = getValue(billmech, ',', 1);
-      billAcceptorValues[2] = getValue(billmech, ',', 2);
-      billAcceptorValues[3] = getValue(billmech, ',', 3);
-      billAcceptorValues[4] = getValue(billmech, ',', 4);
-      billAcceptorValues[5] = getValue(billmech, ',', 5);
+      billAmountInt[0] = getValue(billmech, ',', 0).toInt();
+      billAmountInt[2] = getValue(billmech, ',', 2).toInt();
+      billAmountInt[3] = getValue(billmech, ',', 3).toInt();
+      billAmountInt[4] = getValue(billmech, ',', 4).toInt();
+      billAmountInt[5] = getValue(billmech, ',', 5).toInt();
     }
-    else{
-      billBool = false;
-    }
-    
     const JsonObject maRoot3 = doc[3];
     const char *maRoot3Char = maRoot3["value"];
     const String coinmech = maRoot2Char;
     if(coinmech == ""){
-      coinAcceptorValues[0] = getValue(coinmech, ',', 0);
-      coinAcceptorValues[1] = getValue(coinmech, ',', 1);
-      coinAcceptorValues[2] = getValue(coinmech, ',', 2);
-      coinAcceptorValues[3] = getValue(coinmech, ',', 3);
-      coinAcceptorValues[4] = getValue(coinmech, ',', 4);
-      coinAcceptorValues[5] = getValue(coinmech, ',', 5);
-    }
-    else{
-      coinBool = false;
+      coinAmountFloat[0] = getValue(coinmech, ',', 0).toFloat();
+      coinAmountFloat[1] = getValue(coinmech, ',', 1).toFloat();
+      coinAmountFloat[2] = getValue(coinmech, ',', 2).toFloat();
+      coinAmountFloat[3] = getValue(coinmech, ',', 3).toFloat();
+      coinAmountFloat[4] = getValue(coinmech, ',', 4).toFloat();
+      coinAmountFloat[5] = getValue(coinmech, ',', 5).toFloat();
     }
 
     const JsonObject maRoot4 = doc[4];
@@ -348,7 +328,7 @@ void setup() {
   if (triggerAp == true)
   {
     digitalWrite(11, LOW);
-    message("  Portal launched...", true);
+    printMessage("Portal launched", "", TFT_WHITE, TFT_BLACK);
     config.immediateStart = true;
     portal.join({elementsAux, saveAux});
     portal.config(config);
@@ -361,176 +341,41 @@ void setup() {
   }
   if(currencyATM == ""){
     digitalWrite(11, LOW);
-    message("Restart/launch portal!", true);
+    printMessage("Restart", "launch portal!", TFT_WHITE, TFT_BLACK);
     delay(99999999);
   }
-  
-  if(billBool){
-    message("Starting acceptor(s)", true);
-    billAcceptor.begin(300, SERIAL_8N2, billRX, billTX);
-    billAcceptor.write(184);
-    delay(1000);
-    while(!billAcceptor.available())
-    {
-      billAcceptor.write(182);
-      billAcceptor.read();
-    }
-  }
-
-  if(coinBool){
-    coinAcceptor.begin(4800, SERIAL_8N1, coinRX);
-  }
 }
 
-/////////////////////////////////////
-/////////////MAIN LOOP///////////////
-/////////////////////////////////////
-
-void loop(){
-  stored_time = 0;
-  current_time = 0;
-  active = true;
-  feedme = true;
-  paydisplay = false;
-  coin = 0;
-  bill = 0;
-  tally = 0;
-  tft.fillScreen(TFT_BLACK);
-  while(active == true){
-    if(feedme == true){
-      feedmefiat();
-    }
-
-    byte byteIn = 0;
-    int byteInInt = 0;
-    int byteIntCoin = 0;
-
-    if(billBool){
-      byteIn = billAcceptor.read();
-      byteInInt = billAcceptor.read();
-    }
-    if(coinBool){
-      byteIntCoin = coinAcceptor.read();
-    }
-
-    current_time = millis();
-    if(billBool){
-      if ( byteInInt >= 1 && byteInInt <= 3){
-        bill = 0;
-        stored_time = millis();
-        delay(1000);
-        billAcceptor.write(172);
-        delay(500);
-        billAcceptor.write(172);
-        tft.fillScreen(TFT_BLACK);
-        bill = billAcceptorValues[byteInInt - 1].toFloat();
-        tally = (tally + bill);
-        displayAmount();
-        current_time = millis();
-        feedme = false;
-      }
-    }
-    if(coinBool){
-      if ( byteIntCoin >1){
-        bill = 0;
-        stored_time = millis();
-        tft.fillScreen(TFT_BLACK);
-        coin = coinAcceptorValues[byteIntCoin - 1].toFloat();
-        tally = (tally + coin);
-        displayAmount();
-        current_time = millis();
-        feedme = false;
-      }
-    }
-
-    if(stored_time > 1 && current_time - stored_time > 5000){
-      paydisplay = true;
-      digitalWrite(11, LOW);
-    }
-    if(tally > maxamount){
-      message("Max amount (" + maxamount + ") exceeded", true);
-      paydisplay = true;
-      digitalWrite(11, LOW);
-    }
-    while(paydisplay == true){
-      dataIn = String(tally);
-      makeLNURL();
-      qrShowCodeLNURL("PRESS BUTTON TO EXIT");
-      bool buttonbool = false;
-      while(buttonbool == false){
-        if (button1.pressed) {
-          paydisplay = false;
-          active = false;
-        }
-      }
-    }
-  }
-}
-
-/////////////////////////////////////
-///////////DISPLAY STUFF/////////////
-/////////////////////////////////////
-
-
-void displayAmount(){
-  tft.setCursor(120, 40);
-  tft.setTextColor(TFT_ORANGE);
-  tft.setTextSize(10);
-  tft.setCursor(60, 80);
-  tft.println(String(tally) + currency);
-  tft.setCursor(180, 140);
-  tft.setTextColor(TFT_WHITE);
-  tft.setTextSize(2);
-  tft.println(String(coin) + " entered");
-}
-void message(String note, bool blackscreen)
+void loop()
 {
-  if(blackscreen == true){
-    tft.fillScreen(TFT_BLACK);
-  }
-  tft.setTextSize(3);
-  tft.setCursor(40, 80);
-  tft.setTextColor(TFT_WHITE);
-  tft.println(note);
-}
-
-void printbyte(byte byteIn){
-  tft.fillRect(430, 300, 200, 200, TFT_BLACK);
-  tft.setTextColor(TFT_WHITE);
-  tft.setCursor(430, 300);
-  tft.setTextSize(2);
-  tft.println(String(byteIn));
-}
-
-void waking()
-{
+  // Turn on machines
+  SerialPort1.write(184);
+  digitalWrite(INHIBITMECH, HIGH);
   tft.fillScreen(TFT_BLACK);
-  tft.setTextSize(3);
-  tft.setCursor(40, 80);
-  tft.setTextColor(TFT_WHITE);
-  tft.print("Waking up");
-  delay(1000);
-  tft.print("..5");
-  delay(1000);
-  tft.print("..4");
-  delay(1000);
-  tft.print("..3");
-  delay(1000);
-  tft.print("..2");
-  delay(1000);
-  tft.print("..1");
-  delay(1000);
-  tft.print(".");
+  moneyTimerFun();
+  makeLNURL();
+  qrShowCodeLNURL("SCAN ME. TAP SCREEN WHEN FINISHED");
+}
+
+void printMessage(String text1, String text2, int ftcolor, int bgcolor)
+{
+  tft.fillScreen(bgcolor);
+  tft.setTextColor(ftcolor, bgcolor);
+  tft.setTextSize(5);
+  tft.setCursor(30, 40);
+  tft.println(text1);
+  tft.setCursor(30, 120);
+  tft.println(text2);
 }
 
 void logo()
 {
-  tft.fillScreen(TFT_WHITE);
+  tft.fillScreen(TFT_BLACK);
   tft.setCursor(130, 100);
   tft.setTextSize(10);
   tft.setTextColor(TFT_PURPLE);
   tft.println("FOSSA");
-  tft.setTextColor(TFT_BLACK);
+  tft.setTextColor(TFT_WHITE);
   tft.setCursor(40, 170);
   tft.setTextSize(3);
   tft.println("Bitcoin Lightning ATM");
@@ -584,7 +429,6 @@ void feedmefiat()
 void qrShowCodeLNURL(String message)
 {
   tft.fillScreen(TFT_WHITE);
-
   qrData.toUpperCase();
   const char *qrDataChar = qrData.c_str();
   QRCode qrcoded;
@@ -606,12 +450,74 @@ void qrShowCodeLNURL(String message)
     }
   }
 
-  tft.setCursor(120, 290);
+  tft.setCursor(40, 290);
   tft.setTextSize(2);
   tft.setTextColor(TFT_BLACK, TFT_WHITE);
   tft.println(message);
+  
+  bool waitForTap = true;
+  while(waitForTap){
+    BTNA.read();
+    if (BTNA.wasReleased()) {
+      waitForTap = false;
+    }
+  }
 }
 
+void moneyTimerFun()
+{
+  moneyTimer = millis();
+  coins = 0;
+  bills = 0;
+  total = 0;
+  int countDown = 0;
+  while( millis() - moneyTimer < 10000 || total == 0){
+    if(total == 0){
+      feedmefiat();
+    }
+    if (SerialPort1.available()) {
+      int x = SerialPort1.read();
+       for (int i = 0; i < billAmountSize; i++){
+         if((i+1) == x){
+           moneyTimer = millis();
+           bills = bills + billAmountInt[i];
+           total = (coins + bills);
+           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, TFT_WHITE, TFT_BLACK);
+           countDown = 0;
+         }
+       }
+    }
+    if (SerialPort2.available()) {
+      int x = SerialPort2.read();
+      for (int i = 0; i < coinAmountSize; i++){
+         if((i+1) == x){
+           moneyTimer = millis();
+           coins = coins + coinAmountFloat[i];
+           total = (coins + bills);
+           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, TFT_WHITE, TFT_BLACK);
+           countDown = 0;
+         }
+       }
+    }
+    if(millis() - moneyTimer > 7000 && millis() - moneyTimer < 8000 && countDown != 3 && total != 0){
+      printMessage("Generating QR", "3..." , TFT_WHITE, TFT_BLACK);
+      countDown = 3;
+    }
+    if(millis() - moneyTimer > 8000 && millis() - moneyTimer < 9000 && countDown != 2 && total != 0){
+      printMessage("Generating QR", "3...2...", TFT_WHITE, TFT_BLACK);
+      countDown = 2;
+    }
+    if(millis() - moneyTimer > 9000 && millis() - moneyTimer < 10000 && countDown != 1 && total != 0){
+      printMessage("Generating QR", "3...2...1...", TFT_WHITE, TFT_BLACK);
+      countDown = 1;
+    }
+  }
+  total = (coins + bills) * 100;
+
+  // Turn off machines
+  SerialPort1.write(185);
+  digitalWrite(INHIBITMECH, LOW);
+}
 
 /////////////////////////////////////
 /////////////UTIL STUFF//////////////
@@ -647,7 +553,6 @@ void to_upper(char *arr)
   }
 }
 
-
 ////////////////////////////////////////////
 ///////////////LNURL STUFF//////////////////
 ////USING STEPAN SNIGREVS GREAT CRYTPO//////
@@ -656,7 +561,7 @@ void to_upper(char *arr)
 
 void makeLNURL()
 {
-  randomPin = random(1000, 9999);
+  int randomPin = random(1000, 9999);
   byte nonce[8];
   for (int i = 0; i < 8; i++)
   {
@@ -665,8 +570,8 @@ void makeLNURL()
 
   byte payload[51]; // 51 bytes is max one can get with xor-encryption
 
-    size_t payload_len = xor_encrypt(payload, sizeof(payload), (uint8_t *)secretATM.c_str(), secretATM.length(), nonce, sizeof(nonce), randomPin, dataIn.toInt());
-    preparedURL = baseURLATM + "?atm=1&p=";
+    size_t payload_len = xor_encrypt(payload, sizeof(payload), (uint8_t *)secretATM.c_str(), secretATM.length(), nonce, sizeof(nonce), randomPin, float(total));
+    String preparedURL = baseURLATM + "?atm=1&p=";
     preparedURL += toBase64(payload, payload_len, BASE64_URLSAFE | BASE64_NOPADDING);
     
   Serial.println(preparedURL);
@@ -680,7 +585,6 @@ void makeLNURL()
   bech32_encode(charLnurl, "lnurl", data, len);
   to_upper(charLnurl);
   qrData = charLnurl;
-  Serial.println(qrData);
 }
 
 int xor_encrypt(uint8_t *output, size_t outlen, uint8_t *key, size_t keylen, uint8_t *nonce, size_t nonce_len, uint64_t pin, uint64_t amount_in_cents)
