@@ -10,7 +10,7 @@
 (coming soon)
 
 ## Parts (PROJECT COST UNDER £200!)
-* ESP32 NodeMCU 32s **£3**
+* ESP32 WT32-SC01 **£20**
 * Generic USB cable, with data (used to make the Bill Acceptor config cable) **£2**
 * DG600F(S) Multi Coin Acceptor **£30**
 * NV10USB+ bill acceptor (Seems to be plenty 2nd hand ones on ebay) **£70**
