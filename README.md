@@ -10,6 +10,8 @@
 (coming soon)
 
 ## Parts (PROJECT COST UNDER £200!)
+
+Can run with a coin mech and bill acceptor, or either on their own.
 * ESP32 WT32-SC01 **£20**
 * Generic USB cable, with data (used to make the Bill Acceptor config cable) **£2**
 * DG600F(S) Multi Coin Acceptor **£30**
