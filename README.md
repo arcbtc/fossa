@@ -20,7 +20,7 @@
 * 12v to 5v step down converter **£5**
 * Male/female GPIO jumpers **£5**
 
-![169537001-983c7e17-1163-4f13-9ac7-c695e0e7277f](https://user-images.githubusercontent.com/33088785/188747774-be2a7ef2-e894-4de0-8333-c38bff823510.jpeg)
+![169537001-983c7e17-1163-4f13-9ac7-c695e0e7277f](https://user-images.githubusercontent.com/33088785/188749115-8079a7af-737f-400d-86d7-378a34a9145c.jpeg)
 
 ## Coin acceptor wiring
 
