@@ -140,7 +140,7 @@ void moneyTimerFun()
   coins = 0;
   bills = 0;
   total = 0;
-  printMessage("Feed me fiat", "", "", TFT_WHITE, TFT_BLACK);
+  printMessage("Feed me fiat", String(charge) + "% charge", "", TFT_WHITE, TFT_BLACK);
   while( waitForTap || total == 0){
     if (SerialPort1.available()) {
       int x = SerialPort1.read();
