@@ -335,6 +335,7 @@ void setup()
   config.apid = "Device-" + String((uint32_t)ESP.getEfuseMac(), HEX);
   config.psk = password;
   config.menuItems = AC_MENUITEM_CONFIGNEW | AC_MENUITEM_OPENSSIDS | AC_MENUITEM_RESET;
+  config.title = "FOSSA";
   config.reconnectInterval = 1;
 
   if (triggerAp == true)
@@ -405,14 +406,14 @@ void feedmefiat()
   tft.setCursor(60, 40);
   tft.setTextSize(3);
   tft.println("Bitcoin Lightning ATM");
-  tft.setCursor(120, 280);
+  tft.setCursor(10, 280);
   tft.println("(feed me fiat. " + String(charge) + "% charge)");
   tft.setTextSize(10);
   tft.setCursor(160, 80);
   tft.println("SATS");
   tft.setCursor(180, 140);
   tft.println("FOR");
-  tft.setCursor(160, 200);
+  tft.setCursor(160, 190);
   tft.println("FIAT!");
   delay(100);
   tft.setTextColor(TFT_GREEN);
@@ -420,7 +421,7 @@ void feedmefiat()
   tft.println("SATS");
   tft.setCursor(180, 140);
   tft.println("FOR");
-  tft.setCursor(160, 200);
+  tft.setCursor(160, 190);
   tft.println("FIAT!");
   delay(100);
   tft.setTextColor(TFT_BLUE);
@@ -428,7 +429,7 @@ void feedmefiat()
   tft.println("SATS");
   tft.setCursor(180, 140);
   tft.println("FOR");
-  tft.setCursor(160, 200);
+  tft.setCursor(160, 190);
   tft.println("FIAT!");
   delay(100);
   tft.setTextColor(TFT_ORANGE);
@@ -436,7 +437,7 @@ void feedmefiat()
   tft.println("SATS");
   tft.setCursor(180, 140);
   tft.println("FOR");
-  tft.setCursor(160, 200);
+  tft.setCursor(160, 190);
   tft.println("FIAT!");
   delay(100);
 }
@@ -495,7 +496,7 @@ void moneyTimerFun()
          if((i+1) == x){
            bills = bills + billAmountInt[i];
            total = (coins + bills);
-           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, "   (TAP SCREEN WHEN FINISHED)", TFT_WHITE, TFT_BLACK);
+           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, "TAP SCREEN WHEN FINISHED", TFT_WHITE, TFT_BLACK);
          }
        }
     }
@@ -505,7 +506,7 @@ void moneyTimerFun()
          if((i+1) == x){
            coins = coins + coinAmountFloat[i];
            total = (coins + bills);
-           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, "   (TAP SCREEN WHEN FINISHED)", TFT_WHITE, TFT_BLACK);
+           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, "TAP SCREEN WHEN FINISHED", TFT_WHITE, TFT_BLACK);
          }
        }
     }

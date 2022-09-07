@@ -23,6 +23,7 @@ String currencyATM = "USD";
 int billAmountInt[3] = {5,10,20};
 float coinAmountFloat[6] = {0.02, 0.05, 0.1, 0.2, 0.5, 1};
 int charge = 10; // % you will charge people for service, set in LNbits extension
+int maxamount = 30; // max amount per withdraw
 
 //============================//
 //============================//
@@ -139,17 +140,15 @@ void moneyTimerFun()
   coins = 0;
   bills = 0;
   total = 0;
+  printMessage("Feed me fiat", "", "", TFT_WHITE, TFT_BLACK);
   while( waitForTap || total == 0){
-    if(total == 0){
-      feedmefiat();
-    }
     if (SerialPort1.available()) {
       int x = SerialPort1.read();
        for (int i = 0; i < billAmountSize; i++){
          if((i+1) == x){
            bills = bills + billAmountInt[i];
            total = (coins + bills);
-           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, "   (TAP SCREEN WHEN FINISHED)", TFT_WHITE, TFT_BLACK);
+           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, "TAP SCREEN WHEN FINISHED", TFT_WHITE, TFT_BLACK);
          }
        }
     }
@@ -159,7 +158,7 @@ void moneyTimerFun()
          if((i+1) == x){
            coins = coins + coinAmountFloat[i];
            total = (coins + bills);
-           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, "   (TAP SCREEN WHEN FINISHED)", TFT_WHITE, TFT_BLACK);
+           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, "TAP SCREEN WHEN FINISHED", TFT_WHITE, TFT_BLACK);
          }
        }
     }
