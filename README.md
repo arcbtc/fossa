@@ -17,7 +17,6 @@ https://www.youtube.com/watch?v=vbyYb9Yiu_k
 
 Can run with a coin mech and bill acceptor, or either on their own.
 * ESP32 WT32-SC01 **£20**
-* Generic USB cable, with data (used to make the Bill Acceptor config cable) **£2**
 * DG600F(S) Multi Coin Acceptor **£30**
 * NV10USB+ bill acceptor (Seems to be plenty 2nd hand ones on ebay) **£70**
 * Box ("aluminum medicine box" on amazon **£30**), ("Amazon Basic Home Safe", for more secure solution **£70**)
