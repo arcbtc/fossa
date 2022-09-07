@@ -2,8 +2,6 @@
 
 ## OFFLINE, FOSS, CHEAP, BILLS/COINS, EASY CONFIG WEB PORTAL 
 
-<img src="https://user-images.githubusercontent.com/33088785/188954749-30560f92-6524-4014-b5b5-9194571558e9.png" style="width:300px">
-
 
 > <i>Join our <a href="https://t.me/makerbits">telegram support/chat</a>.</i>
 
