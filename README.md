@@ -36,7 +36,7 @@ Can run with a coin mech and bill acceptor, or either on their own.
 
 ### Mounting in box
 
-Use the templates provided <a href="cuttingTemplate.pdf"here</a>. print out standard UK A4. Its useful if the pins on the bill acceptor and coin mech are accessible.
+Use the templates provided <a href="cuttingTemplate.pdf">here</a>. print out standard UK A4. Its useful if the pins on the bill acceptor and coin mech are accessible.
 
 * For the `Aluminim Storage Box` solution, holes can be cut with a sharp knife (clearly not secure, but fine for somewhere you can keep an eye on the ATM or for demoes).
 
