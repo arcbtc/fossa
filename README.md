@@ -26,10 +26,6 @@ Can run with a coin mech and bill acceptor, or either on their own.
 
 ## Construction
 
-For the `Aluminim Storage Box` solution, holes can be cut with a sharp knife (clearly not secure, but fine for somewhere you can keep an eye on the ATM or for demoes).
-
-For the `Home Safe` solution, holes can be cut with angle grinder and a very thin cutter. (If you have not used an angle grinder before, don't be scared, they're cheap, easy enought to use, and very useful. Just take your time and wear safetly equipment.)
-
 ### Coin acceptor wiring
 
 ![169517488-65bfba37-0c9c-4dc4-9533-c6c4517cc1ff](https://user-images.githubusercontent.com/33088785/188748943-960a15fd-f0c8-48e9-870a-af6cde1a3b31.png)
@@ -37,6 +33,16 @@ For the `Home Safe` solution, holes can be cut with angle grinder and a very thi
 ### Bill acceptor wiring
 
 ![169518370-2bdf7acd-e5f9-4d34-bd34-26854b805704](https://user-images.githubusercontent.com/33088785/188748970-7f463a3b-0594-4902-b8c9-0e084029618d.png)
+
+### Mounting in box
+
+Use the templates provided <a href="cuttingTemplate.pdf"here</a>. print out standard UK A4. Its useful if the pins on the bill acceptor and coin mech are accessible.
+
+* For the `Aluminim Storage Box` solution, holes can be cut with a sharp knife (clearly not secure, but fine for somewhere you can keep an eye on the ATM or for demoes).
+
+* For the `Home Safe` solution, holes can be cut with angle grinder and a very thin cutter. (If you have not used an angle grinder before, don't be scared, they're cheap, easy enought to use, and very useful. Just take your time and wear safetly equipment.)
+
+I use CT1 sealent/adhesive for mounting screen, although the screen has screw points, which should be used for added security.
 
 ## Installing arduino + libraries
 
