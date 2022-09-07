@@ -13,6 +13,7 @@
 #define TX2 4 //Coinmech
 #define INHIBITMECH 2 //Coinmech
 
+
 // LNURLDevices ATM details
 String baseURLATM = "https://legend.lnbits.com/lnurldevice/api/v1/lnurl/M8wiiij8oLEgK6RNXLvoFs";
 String secretATM = "3czaYALeuAp4H36tH3nasH";
@@ -21,6 +22,7 @@ String currencyATM = "USD";
 // Coin and Bill Acceptor amounts
 int billAmountInt[3] = {5,10,20};
 float coinAmountFloat[6] = {0.02, 0.05, 0.1, 0.2, 0.5, 1};
+int charge = 10; // % you will charge people for service, set in LNbits extension
 
 //============================//
 //============================//
@@ -73,13 +75,13 @@ void loop()
   digitalWrite(INHIBITMECH, HIGH);
   
   tft.fillScreen(TFT_BLACK);
-  printMessage("Feed me FIAT", "", TFT_WHITE, TFT_BLACK);
+  printMessage("Feed me FIAT", String(charge) + "% charge", "", TFT_WHITE, TFT_BLACK);
   moneyTimerFun();
   makeLNURL();
   qrShowCodeLNURL("SCAN ME. TAP SCREEN WHEN FINISHED");
 }
 
-void printMessage(String text1, String text2, int ftcolor, int bgcolor)
+void printMessage(String text1, String text2, String text3, int ftcolor, int bgcolor)
 {
   tft.fillScreen(bgcolor);
   tft.setTextColor(ftcolor, bgcolor);
@@ -88,6 +90,9 @@ void printMessage(String text1, String text2, int ftcolor, int bgcolor)
   tft.println(text1);
   tft.setCursor(30, 120);
   tft.println(text2);
+  tft.setCursor(30, 200);
+  tft.setTextSize(3);
+  tft.println(text3);
 }
 
 void qrShowCodeLNURL(String message)
@@ -130,21 +135,21 @@ void qrShowCodeLNURL(String message)
 
 void moneyTimerFun()
 {
-  moneyTimer = millis();
+  bool waitForTap = true;
   coins = 0;
   bills = 0;
   total = 0;
-  int countDown = 0;
-  while( millis() - moneyTimer < 10000 || total == 0){
+  while( waitForTap || total == 0){
+    if(total == 0){
+      feedmefiat();
+    }
     if (SerialPort1.available()) {
       int x = SerialPort1.read();
        for (int i = 0; i < billAmountSize; i++){
          if((i+1) == x){
-           moneyTimer = millis();
            bills = bills + billAmountInt[i];
            total = (coins + bills);
-           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, TFT_WHITE, TFT_BLACK);
-           countDown = 0;
+           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, "   (TAP SCREEN WHEN FINISHED)", TFT_WHITE, TFT_BLACK);
          }
        }
     }
@@ -152,25 +157,15 @@ void moneyTimerFun()
       int x = SerialPort2.read();
       for (int i = 0; i < coinAmountSize; i++){
          if((i+1) == x){
-           moneyTimer = millis();
            coins = coins + coinAmountFloat[i];
            total = (coins + bills);
-           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, TFT_WHITE, TFT_BLACK);
-           countDown = 0;
+           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, "   (TAP SCREEN WHEN FINISHED)", TFT_WHITE, TFT_BLACK);
          }
        }
     }
-    if(millis() - moneyTimer > 7000 && millis() - moneyTimer < 8000 && countDown != 3 && total != 0){
-      printMessage("Generating QR", "3..." , TFT_WHITE, TFT_BLACK);
-      countDown = 3;
-    }
-    if(millis() - moneyTimer > 8000 && millis() - moneyTimer < 9000 && countDown != 2 && total != 0){
-      printMessage("Generating QR", "3...2...", TFT_WHITE, TFT_BLACK);
-      countDown = 2;
-    }
-    if(millis() - moneyTimer > 9000 && millis() - moneyTimer < 10000 && countDown != 1 && total != 0){
-      printMessage("Generating QR", "3...2...1...", TFT_WHITE, TFT_BLACK);
-      countDown = 1;
+    BTNA.read();
+    if (BTNA.wasReleased() || total > maxamount) {
+      waitForTap = false;
     }
   }
   total = (coins + bills) * 100;

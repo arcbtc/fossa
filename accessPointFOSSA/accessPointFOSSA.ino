@@ -52,6 +52,7 @@ int bills;
 float coins;
 float total;
 int maxamount;
+int charge;
 
 bool billBool = true;
 bool coinBool = true;
@@ -125,6 +126,12 @@ static const char PAGE_ELEMENTS[] PROGMEM = R"(
       "type": "ACInput",
       "label": "Max withdrawable in fiat",
       "value": "20"
+    },
+    {
+      "name": "charge",
+      "type": "ACInput",
+      "label": "Percentage charge for service",
+      "value": "10"
     },
     {
       "name": "load",
@@ -266,6 +273,11 @@ void setup()
     const char *maRoot4Char = maRoot4["value"];
     const String maxamountstr = maRoot4Char;
     maxamount = maxamountstr.toInt();
+
+    const JsonObject maRoot5 = doc[5];
+    const char *maRoot5Char = maRoot5["value"];
+    const String chargestr = maRoot5Char;
+    charge = chargestr.toInt();
   }
   else{
     triggerAp = true;
@@ -281,7 +293,7 @@ void setup()
     File param = FlashFS.open(PARAM_FILE, "r");
     if (param)
     {
-      aux.loadElement(param, {"password", "lnurl", "coinmech", "billmech", "maxamount"});
+      aux.loadElement(param, {"password", "lnurl", "coinmech", "billmech", "maxamount", "charge"});
       param.close();
     }
 
@@ -290,7 +302,7 @@ void setup()
       File param = FlashFS.open(PARAM_FILE, "r");
       if (param)
       {
-        aux.loadElement(param, {"password", "lnurl", "coinmech", "billmech", "maxamount"});
+        aux.loadElement(param, {"password", "lnurl", "coinmech", "billmech", "maxamount", "charge"});
         param.close();
       }
     }
@@ -303,7 +315,7 @@ void setup()
     if (param)
     {
       // save as a loadable set for parameters.
-      elementsAux.saveElement(param, {"password", "lnurl", "coinmech", "billmech", "maxamount"});
+      elementsAux.saveElement(param, {"password", "lnurl", "coinmech", "billmech", "maxamount", "charge"});
       param.close();
       // read the saved elements again to display.
       param = FlashFS.open(PARAM_FILE, "r");
@@ -328,7 +340,7 @@ void setup()
   if (triggerAp == true)
   {
     digitalWrite(11, LOW);
-    printMessage("Portal launched", "", TFT_WHITE, TFT_BLACK);
+    printMessage("Portal launched", "", "", TFT_WHITE, TFT_BLACK);
     config.immediateStart = true;
     portal.join({elementsAux, saveAux});
     portal.config(config);
@@ -341,7 +353,7 @@ void setup()
   }
   if(currencyATM == ""){
     digitalWrite(11, LOW);
-    printMessage("Restart", "launch portal!", TFT_WHITE, TFT_BLACK);
+    printMessage("Restart", "launch portal!", "", TFT_WHITE, TFT_BLACK);
     delay(99999999);
   }
 }
@@ -357,7 +369,7 @@ void loop()
   qrShowCodeLNURL("SCAN ME. TAP SCREEN WHEN FINISHED");
 }
 
-void printMessage(String text1, String text2, int ftcolor, int bgcolor)
+void printMessage(String text1, String text2, String text3, int ftcolor, int bgcolor)
 {
   tft.fillScreen(bgcolor);
   tft.setTextColor(ftcolor, bgcolor);
@@ -366,6 +378,9 @@ void printMessage(String text1, String text2, int ftcolor, int bgcolor)
   tft.println(text1);
   tft.setCursor(30, 120);
   tft.println(text2);
+  tft.setCursor(30, 200);
+  tft.setTextSize(3);
+  tft.println(text3);
 }
 
 void logo()
@@ -391,7 +406,7 @@ void feedmefiat()
   tft.setTextSize(3);
   tft.println("Bitcoin Lightning ATM");
   tft.setCursor(120, 280);
-  tft.println("(feed me fiat)");
+  tft.println("(feed me fiat. " + String(charge) + "% charge)");
   tft.setTextSize(10);
   tft.setCursor(160, 80);
   tft.println("SATS");
@@ -466,12 +481,11 @@ void qrShowCodeLNURL(String message)
 
 void moneyTimerFun()
 {
-  moneyTimer = millis();
+  bool waitForTap = true;
   coins = 0;
   bills = 0;
   total = 0;
-  int countDown = 0;
-  while( millis() - moneyTimer < 10000 || total == 0){
+  while( waitForTap || total == 0){
     if(total == 0){
       feedmefiat();
     }
@@ -479,11 +493,9 @@ void moneyTimerFun()
       int x = SerialPort1.read();
        for (int i = 0; i < billAmountSize; i++){
          if((i+1) == x){
-           moneyTimer = millis();
            bills = bills + billAmountInt[i];
            total = (coins + bills);
-           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, TFT_WHITE, TFT_BLACK);
-           countDown = 0;
+           printMessage(billAmountInt[i] + currencyATM, "Total: " + String(total) + currencyATM, "   (TAP SCREEN WHEN FINISHED)", TFT_WHITE, TFT_BLACK);
          }
        }
     }
@@ -491,25 +503,15 @@ void moneyTimerFun()
       int x = SerialPort2.read();
       for (int i = 0; i < coinAmountSize; i++){
          if((i+1) == x){
-           moneyTimer = millis();
            coins = coins + coinAmountFloat[i];
            total = (coins + bills);
-           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, TFT_WHITE, TFT_BLACK);
-           countDown = 0;
+           printMessage(coinAmountFloat[i] + currencyATM, "Total: " + String(total) + currencyATM, "   (TAP SCREEN WHEN FINISHED)", TFT_WHITE, TFT_BLACK);
          }
        }
     }
-    if(millis() - moneyTimer > 7000 && millis() - moneyTimer < 8000 && countDown != 3 && total != 0){
-      printMessage("Generating QR", "3..." , TFT_WHITE, TFT_BLACK);
-      countDown = 3;
-    }
-    if(millis() - moneyTimer > 8000 && millis() - moneyTimer < 9000 && countDown != 2 && total != 0){
-      printMessage("Generating QR", "3...2...", TFT_WHITE, TFT_BLACK);
-      countDown = 2;
-    }
-    if(millis() - moneyTimer > 9000 && millis() - moneyTimer < 10000 && countDown != 1 && total != 0){
-      printMessage("Generating QR", "3...2...1...", TFT_WHITE, TFT_BLACK);
-      countDown = 1;
+    BTNA.read();
+    if (BTNA.wasReleased() || total > maxamount) {
+      waitForTap = false;
     }
   }
   total = (coins + bills) * 100;
