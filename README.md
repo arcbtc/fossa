@@ -35,15 +35,17 @@ Can run with a coin mech and bill acceptor, or either on their own.
 ![169517488-65bfba37-0c9c-4dc4-9533-c6c4517cc1ff](https://user-images.githubusercontent.com/33088785/188748943-960a15fd-f0c8-48e9-870a-af6cde1a3b31.png)
 
 > You can usually order the coin acceptor pre-programmed to your currencies, otherwise you will need to train the acceptor using <a href="https://www.youtube.com/watch?v=Dyun1xjKqc4">this guide</a>.
+
 ### Bill acceptor wiring
 
 ![169518370-2bdf7acd-e5f9-4d34-bd34-26854b805704](https://user-images.githubusercontent.com/33088785/188748970-7f463a3b-0594-4902-b8c9-0e084029618d.png)
 
 
-http://www.innovative-technology.com/support/secure-download
+
 
 > The bill acceptor needs to br programmed to your currency and set to `SIO` mode, usually you can buy them preconfigured. If you have to prgram, download the Validator Manager software <a href="https://www.dropbox.com/sh/2mle0czl2j2w7yq/AABie6AJQTq-tXmBv1TUhBUGa?dl=0
-">here</a> or here. Details of programming can be found <a href="">here</a>. (Don't try using the programming cards in the guide, thats an old system these machines no longer support)
+">here</a> or <a href"http://www.innovative-technology.com/support/secure-download">here</a>. Details of programming can be found <a href="https://github.com/arcbtc/fossa/blob/main/NV10Manual_2.PDF.pdf">here</a>. 
+> (Don't try using the programming cards in the guide, thats an old system these machines no longer support)
 ### Mounting in box
 
 Use the templates provided <a href="cuttingTemplate.pdf">here</a>. print out standard UK A4. Its useful if the pins on the bill acceptor and coin mech are accessible.
