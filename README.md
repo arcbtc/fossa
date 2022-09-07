@@ -16,7 +16,7 @@ Can run with a coin mech and bill acceptor, or either on their own.
 * Generic USB cable, with data (used to make the Bill Acceptor config cable) **£2**
 * DG600F(S) Multi Coin Acceptor **£30**
 * NV10USB+ bill acceptor (Seems to be plenty 2nd hand ones on ebay) **£70**
-* Storage box (the readily available "aluminum medicine box" boxes on amazon are perfect) **£30**
+* Storage box ("aluminum medicine box" boxes on amazon are good **£30**), ("Amazon Basic Home Safe" work well, for more secure solution **£70**)
 * Screw Terminal block **£1**
 * 12v power supply (12v battery also works well, for unplugged version) **£8**
 * 12v to 5v step down converter **£5**
