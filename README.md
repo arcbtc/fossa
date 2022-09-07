@@ -24,11 +24,16 @@ Can run with a coin mech and bill acceptor, or either on their own.
 
 ![image](https://user-images.githubusercontent.com/33088785/188751337-f1a946d6-0424-42f6-8bc2-2f06f87d78a1.png)
 
-## Coin acceptor wiring
+## Construction
+
+For the aluminim storage box solution, holes can be cut with a sharp knife (clearly not secure, but fine for somewhere you can keep an eye on the device).
+For the home safe solution, holes can be cut with angle grinder and a very thin cutter. (If you have not used an angle grinder before, don't be scared, they're cheap, easy enought to use, and very useful. Just take your time and wear safetly equipment.)
+
+### Coin acceptor wiring
 
 ![169517488-65bfba37-0c9c-4dc4-9533-c6c4517cc1ff](https://user-images.githubusercontent.com/33088785/188748943-960a15fd-f0c8-48e9-870a-af6cde1a3b31.png)
 
-## Bill acceptor wiring
+### Bill acceptor wiring
 
 ![169518370-2bdf7acd-e5f9-4d34-bd34-26854b805704](https://user-images.githubusercontent.com/33088785/188748970-7f463a3b-0594-4902-b8c9-0e084029618d.png)
 
