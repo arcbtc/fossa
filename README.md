@@ -21,7 +21,7 @@ Can run with a coin mech and bill acceptor, or either on their own.
 * NV10USB+ bill acceptor (Seems to be plenty 2nd hand ones on ebay) **£70**
 * Box ("aluminum medicine box" on amazon **£30**), ("Amazon Basic Home Safe", for more secure solution **£70**)
 * Screw Terminal block **£1**
-* 12v power supply (12v battery also works well, for unplugged version) **£8**
+* 12v power supply, best to get one with terminal block adapter (12v battery also works well, for unplugged version) **£8**
 * 12v to 5v step down converter with USB **£5**
 * Male/female GPIO jumpers **£5**
 
