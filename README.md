@@ -7,7 +7,7 @@
 
 ## Video tutorial
 
-(coming soon)
+https://www.youtube.com/watch?v=vbyYb9Yiu_k
 
 ## Parts (PROJECT COST UNDER £200!)
 
