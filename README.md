@@ -42,7 +42,7 @@ Use the templates provided <a href="cuttingTemplate.pdf"here</a>. print out stan
 
 * For the `Home Safe` solution, holes can be cut with angle grinder and a very thin cutter. (If you have not used an angle grinder before, don't be scared, they're cheap, easy enought to use, and very useful. Just take your time and wear safetly equipment.)
 
-I use CT1 sealent/adhesive for mounting screen, although the screen has screw points, which should be used for added security.
+We use CT1 sealent/adhesive (or similar) for mounting screen, although the screen has screw points, which should be used for added security.
 
 ## Installing arduino + libraries
 
