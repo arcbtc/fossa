@@ -22,7 +22,7 @@ Can run with a coin mech and bill acceptor, or either on their own.
 * Box ("aluminum medicine box" on amazon **£30**), ("Amazon Basic Home Safe", for more secure solution **£70**)
 * Screw Terminal block **£1**
 * 12v power supply (12v battery also works well, for unplugged version) **£8**
-* 12v to 5v step down converter **£5**
+* 12v to 5v step down converter with USB **£5**
 * Male/female GPIO jumpers **£5**
 
 ![image](https://user-images.githubusercontent.com/33088785/188955691-248981d3-7189-4548-a650-60986cc3d433.png)
