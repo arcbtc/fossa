@@ -26,7 +26,8 @@ Can run with a coin mech and bill acceptor, or either on their own.
 
 ## Construction
 
-For the aluminim storage box solution, holes can be cut with a sharp knife (clearly not secure, but fine for somewhere you can keep an eye on the device).
+For the aluminim storage box solution, holes can be cut with a sharp knife (clearly not secure, but fine for somewhere you can keep an eye on the ATM or for demoes).
+
 For the home safe solution, holes can be cut with angle grinder and a very thin cutter. (If you have not used an angle grinder before, don't be scared, they're cheap, easy enought to use, and very useful. Just take your time and wear safetly equipment.)
 
 ### Coin acceptor wiring
