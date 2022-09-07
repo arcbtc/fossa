@@ -1,4 +1,4 @@
-![FOSSA](https://user-images.githubusercontent.com/33088785/169420554-1b5a132a-3235-44ac-9ede-35d7c592e6e7.png)
+![image](https://user-images.githubusercontent.com/33088785/188837193-0c674962-1771-4c03-9e7b-1e9b8d4f736b.png)
 
 ## OFFLINE, FOSS, CHEAP, BILLS/COINS, EASY CONFIG WEB PORTAL 
 
