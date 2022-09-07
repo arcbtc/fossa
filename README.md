@@ -26,6 +26,8 @@ Can run with a coin mech and bill acceptor, or either on their own.
 
 ## Construction
 
+<img src="https://user-images.githubusercontent.com/33088785/188833972-1665fb20-39be-456e-93a1-276c0e2a9237.png" style="width:300px">
+
 ### Coin acceptor wiring
 
 ![169517488-65bfba37-0c9c-4dc4-9533-c6c4517cc1ff](https://user-images.githubusercontent.com/33088785/188748943-960a15fd-f0c8-48e9-870a-af6cde1a3b31.png)
