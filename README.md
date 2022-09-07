@@ -22,7 +22,7 @@ Can run with a coin mech and bill acceptor, or either on their own.
 * 12v to 5v step down converter **£5**
 * Male/female GPIO jumpers **£5**
 
-![image](https://user-images.githubusercontent.com/33088785/188955435-18c7c34c-d965-4643-8a38-7294c6c3bcd1.png)
+![image](https://user-images.githubusercontent.com/33088785/188955691-248981d3-7189-4548-a650-60986cc3d433.png)
 
 
 ## Construction
