@@ -45,7 +45,7 @@ Can run with a coin mech and bill acceptor, or either on their own.
 
 > The bill acceptor needs to be programmed to your currency and set to `SIO` mode, usually you can buy them preconfigured. If you have to program, buy <a href="https://www.innovative-technology.com/shop/cables/nv9-nv10-usb-host-cable-detail">this wire</a> and download the Validator Manager software <a href="https://www.dropbox.com/sh/2mle0czl2j2w7yq/AABie6AJQTq-tXmBv1TUhBUGa?dl=0">here</a> or <a href="http://www.innovative-technology.com/support/secure-download">here</a> (sadly only runs on windows, so use a friends machine). Details on programming can be found <a href="https://github.com/arcbtc/fossa/blob/main/NV10Manual_2.PDF.pdf">here</a>. Its relatively straight forward to program, plug in USB host cable, turn on holding config button for 2 secs, open the Validator Manager software. 
 
-> (Don't try using the programming cards in the guide, thats an old system these machines no longer support "Many Bothans died to bring us this information,")
+> (Ignore all the hardware requirements for programming in the guide, you just need the host cable! Don't try using the programming cards in the guide, thats an old system these machines no longer support "Many Bothans died to bring us this information,")
 ### Mounting in box
 
 Use the templates provided <a href="cuttingTemplate.pdf">here</a>. print out standard UK A4. Its useful if the pins on the bill acceptor and coin mech are accessible.
