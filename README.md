@@ -1,4 +1,5 @@
-![image](https://user-images.githubusercontent.com/33088785/188837193-0c674962-1771-4c03-9e7b-1e9b8d4f736b.png)
+![image](https://user-images.githubusercontent.com/33088785/189915358-b8d75cf5-9b10-43b8-a874-3cf08b0b95c5.png)
+
 
 ## OFFLINE, FOSS, CHEAP, BILLS/COINS, EASY CONFIG WEB PORTAL 
 
