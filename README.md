@@ -1,3 +1,5 @@
+<h1>Moved to https://github.com/lnbits/fossa</h1>
+
 ![image](https://user-images.githubusercontent.com/33088785/189915358-b8d75cf5-9b10-43b8-a874-3cf08b0b95c5.png)
 
 
